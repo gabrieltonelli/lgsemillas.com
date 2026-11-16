@@ -1,0 +1,23 @@
+[build]
+  command = "cd client && npm install && npm run build"
+  publish = "client/dist"
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[functions]
+  node_bundler = "esbuild"
+
+# Redirección de llamadas /api/* hacia Netlify Function sin exponer credenciales en el cliente
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+
+# Fallback SPA para rutas del frontend React
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+

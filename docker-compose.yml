@@ -1,0 +1,35 @@
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: lgsemillas-server
+    restart: unless-stopped
+    env_file:
+      - ./server/.env
+    environment:
+      PORT: 4580
+      NODE_ENV: production
+      CORS_ORIGIN: ${DOCKER_CORS_ORIGIN:-http://localhost:8580}
+    ports:
+      - "${SERVER_DOCKER_PORT:-4580}:4580"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:4580/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: ${DOCKER_VITE_API_BASE_URL:-/api}
+        VITE_SITE_NAME: ${DOCKER_VITE_SITE_NAME:-LG Semillas — Limagrain Argentina}
+    container_name: lgsemillas-client
+    restart: unless-stopped
+    depends_on:
+      - server
+    ports:
+      - "${CLIENT_DOCKER_PORT:-8580}:80"
+
