@@ -9,6 +9,7 @@ import {
   Scale,
   X,
   ArrowUpRight,
+  ArrowLeft,
   ShieldAlert,
   Sparkles,
   Download,
@@ -142,6 +143,7 @@ const ScoreBar = ({ label, value, delayMs = 0 }) => (
 );
 
 export default function ProductCatalog({
+  mode = 'home',
   selectedCategory,
   onCategoryChange,
   searchTerm,
@@ -149,6 +151,8 @@ export default function ProductCatalog({
   regions = [],
   onRequestQuote,
   compareCountChange,
+  onOpenCatalogPage,
+  onNavigate,
 }) {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -179,7 +183,13 @@ export default function ProductCatalog({
     compareCountChange?.(compareIds.length);
   }, [compareIds.length, compareCountChange]);
 
+  useEffect(() => () => compareCountChange?.(0), [compareCountChange]);
+
   useEffect(() => {
+    if (mode !== 'page') {
+      setLoading(false);
+      return undefined;
+    }
     let active = true;
     const load = async () => {
       setLoading(true);
@@ -198,11 +208,11 @@ export default function ProductCatalog({
     return () => {
       active = false;
     };
-  }, [selectedCategory, searchTerm, technology, region]);
+  }, [mode, selectedCategory, searchTerm, technology, region]);
 
   useGSAP(
     () => {
-      if (loading || products.length === 0) return;
+      if (mode !== 'page' || loading || products.length === 0) return;
       const mm = gsap.matchMedia();
       mm.add('(prefers-reduced-motion: no-preference)', () => {
         gsap.from('.gsap-product-card', {
@@ -215,7 +225,7 @@ export default function ProductCatalog({
         });
       });
     },
-    { scope: sectionRef, dependencies: [products, loading] }
+    { scope: sectionRef, dependencies: [mode, products, loading] }
   );
 
   const compareItems = useMemo(
@@ -265,7 +275,9 @@ export default function ProductCatalog({
 
   return (
     <div ref={sectionRef}>
-      {/* ================= BLOQUE A: DAMERO 50/50 OFICIAL DE LOS 5 CULTIVOS ================= */}
+      {mode === 'home' && (
+        <>
+          {/* ================= BLOQUE A: DAMERO 50/50 OFICIAL DE LOS 5 CULTIVOS ================= */}
       <section aria-label="Cultivos LG Semillas" className="w-full grid grid-cols-1 md:grid-cols-2">
         {CHECKERBOARD_ITEMS.map((item) => (
           <div
@@ -330,19 +342,17 @@ export default function ProductCatalog({
             Usá nuestro recomendador interactivo por zona agroecológica y fecha de siembra, o compará hasta 3 materiales lado a lado.
           </p>
           <div className="flex flex-wrap gap-2.5 pt-1">
-            <a
-              href="#recomendador"
+            <button
+              type="button"
+              onClick={() => onNavigate?.('/agro-point')}
               className="cast-btn-press min-h-[44px] px-5 py-2.5 rounded-xl bg-brand-red hover:bg-brand-darkred text-white font-bold text-xs uppercase tracking-wider inline-flex items-center gap-2 shadow-red"
             >
               <span>Abrir Recomendador</span>
               <ArrowUpRight className="w-4 h-4" />
-            </a>
+            </button>
             <button
               type="button"
-              onClick={() => {
-                onCategoryChange('all');
-                document.getElementById('catalogo')?.scrollIntoView({ behavior: 'smooth' });
-              }}
+              onClick={() => onOpenCatalogPage?.('all')}
               className="cast-btn-press min-h-[44px] px-5 py-2.5 rounded-xl bg-white border border-stone-300 hover:border-brand-red text-brand-navy font-bold text-xs uppercase tracking-wider"
             >
               Ver Todo el Portfolio
@@ -375,6 +385,14 @@ export default function ProductCatalog({
             </h2>
 
             <div className="mt-5 flex flex-wrap justify-center md:justify-end gap-3">
+              <button
+                type="button"
+                onClick={() => onOpenCatalogPage?.(activeBannerTab.id)}
+                className="cast-btn-press min-h-[46px] px-6 py-3 rounded-sm bg-white hover:bg-brand-cream text-brand-navy font-bold text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2 shadow-xl"
+              >
+                <span>Explorar Catálogo Interactivo</span>
+                <ArrowUpRight className="w-4 h-4 text-brand-red" />
+              </button>
               <a
                 href="https://www.lgsemillas.com/assets/productos/CatalogoLG2026.pdf"
                 target="_blank"
@@ -393,7 +411,7 @@ export default function ProductCatalog({
           </div>
         </div>
 
-        {/* 5 Botones Circulares Rojos montados sobre el borde inferior del banner (igual a la captura oficial) */}
+        {/* 5 Botones Circulares Rojos montados sobre el borde inferior del banner (tamaño idéntico en todos) */}
         <div className="max-w-7xl mx-auto px-4 sm:px-10 -mt-9 sm:-mt-10 relative z-10 flex items-center justify-center md:justify-start gap-2.5 sm:gap-4 flex-wrap">
           {BANNER_TABS.map((tab) => {
             const isActive =
@@ -407,8 +425,8 @@ export default function ProductCatalog({
                 title={tab.label}
                 className={`group relative w-14 h-14 sm:w-[72px] sm:h-[72px] rounded-full bg-white p-0.5 shadow-xl transition-all duration-200 ${
                   isActive
-                    ? 'ring-4 ring-brand-red scale-110'
-                    : 'hover:scale-105 opacity-95 hover:opacity-100'
+                    ? 'ring-4 ring-brand-red opacity-100'
+                    : 'opacity-90 hover:opacity-100 hover:ring-2 hover:ring-brand-red/50'
                 }`}
               >
                 <img
@@ -421,20 +439,32 @@ export default function ProductCatalog({
           })}
         </div>
       </section>
+        </>
+      )}
 
-      {/* ================= BLOQUE C: GRILLA INTERACTIVA, FICHAS TÉCNICAS Y COMPARADOR ================= */}
-      <section id="catalogo" className="py-10 sm:py-16 bg-brand-cream">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-7">
-            <div className="max-w-2xl">
-              <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-red mb-1.5">
-                <Sparkles className="w-3.5 h-3.5" />
-                Explorador Técnico 2026
-              </span>
-              <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-brand-navy tracking-tight">
-                Fichas agronómicas y comparador de materiales
-              </h2>
-            </div>
+      {mode === 'page' && (
+        <>
+          {/* ================= BLOQUE C: GRILLA INTERACTIVA, FICHAS TÉCNICAS Y COMPARADOR ================= */}
+          <section id="catalogo" className="py-10 sm:py-16 bg-brand-cream min-h-[75vh]">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-7 border-b border-stone-200 pb-6">
+                <div className="max-w-2xl">
+                  <button
+                    type="button"
+                    onClick={() => onNavigate?.('/')}
+                    className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-gray hover:text-brand-red mb-3 transition-colors"
+                  >
+                    <ArrowLeft className="w-3.5 h-3.5" />
+                    <span>Volver al Inicio</span>
+                  </button>
+                  <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-red mb-1.5 ml-3">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    Explorador Técnico 2026
+                  </span>
+                  <h1 className="font-display font-extrabold text-2xl sm:text-4xl text-brand-navy tracking-tight">
+                    Fichas agronómicas y comparador de materiales
+                  </h1>
+                </div>
             <div className="text-sm font-semibold text-brand-gray shrink-0">
               Mostrando <span className="text-brand-red font-extrabold">{products.length}</span>{' '}
               materiales
@@ -963,6 +993,8 @@ export default function ProductCatalog({
             </div>
           </div>
         </div>
+      )}
+        </>
       )}
     </div>
   );

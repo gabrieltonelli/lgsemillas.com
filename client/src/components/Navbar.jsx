@@ -3,6 +3,7 @@ import { Menu, X, ChevronDown, ChevronRight, Compass, ShieldCheck } from 'lucide
 import { clientEnv } from '../config/env.js';
 
 const PRODUCT_SUBMENU = [
+  { id: 'all', label: 'Catálogo Completo 2026' },
   { id: 'maiz', label: 'Productos Maíz' },
   { id: 'silo', label: 'Productos Maíz Silo' },
   { id: 'girasol', label: 'Productos Girasol' },
@@ -10,7 +11,7 @@ const PRODUCT_SUBMENU = [
   { id: 'soja', label: 'Productos Soja' },
 ];
 
-export default function Navbar({ onSelectCropShortcut }) {
+export default function Navbar({ currentPath = '/', onNavigate, onSelectCropShortcut }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -29,12 +30,24 @@ export default function Navbar({ onSelectCropShortcut }) {
     };
   }, [mobileOpen]);
 
+  const navigate = (e, path, hash = null) => {
+    if (e) e.preventDefault();
+    setOpenDropdown(null);
+    setMobileOpen(false);
+    onNavigate?.(path, hash);
+  };
+
   const jumpToCrop = (cropId) => {
     onSelectCropShortcut?.(cropId);
     setOpenDropdown(null);
     setMobileOpen(false);
-    document.getElementById('catalogo')?.scrollIntoView({ behavior: 'smooth' });
+    onNavigate?.('/catalogo');
   };
+
+  const linkClass = (isActive) =>
+    `px-2.5 2xl:px-3 py-2 text-xs font-bold uppercase tracking-wider transition-colors whitespace-nowrap ${
+      isActive ? 'text-brand-red' : 'text-brand-navy hover:text-brand-red'
+    }`;
 
   return (
     <header
@@ -43,9 +56,10 @@ export default function Navbar({ onSelectCropShortcut }) {
       }`}
     >
       <div className="w-full flex items-stretch justify-between">
-        {/* Bloque Rojo Izquierdo Icónico LG Semillas (Fiel a la web oficial con contraste perfecto) */}
+        {/* Bloque Rojo Izquierdo Icónico LG Semillas */}
         <a
-          href="#inicio"
+          href="/"
+          onClick={(e) => navigate(e, '/', 'inicio')}
           aria-label="Inicio LG Semillas"
           className="bg-brand-red hover:bg-brand-darkred transition-colors px-4 sm:px-7 lg:px-10 py-3 flex items-center justify-center shrink-0 min-w-[138px] sm:min-w-[185px]"
         >
@@ -57,39 +71,44 @@ export default function Navbar({ onSelectCropShortcut }) {
         </a>
 
         {/* Barra Blanca Derecha */}
-        <div className="flex-1 bg-white px-4 sm:px-6 lg:px-10 flex items-center justify-between gap-4">
-          {/* Navegación Desktop en mayúsculas limpias */}
+        <div className="flex-1 bg-white px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3">
+          {/* Navegación Desktop */}
           <nav
-            className="hidden xl:flex items-center gap-1 2xl:gap-2 mx-auto"
+            className="hidden xl:flex items-center gap-0.5 2xl:gap-1.5 mx-auto"
             aria-label="Navegación principal"
           >
             <a
-              href="#inicio"
-              className="px-3 py-2 text-xs font-bold uppercase tracking-wider text-brand-red hover:text-brand-darkred transition-colors"
+              href="/"
+              onClick={(e) => navigate(e, '/', 'inicio')}
+              className={linkClass(currentPath === '/')}
             >
               HOME
             </a>
             <a
-              href="#nosotros"
-              className="px-3 py-2 text-xs font-bold uppercase tracking-wider text-brand-navy hover:text-brand-red transition-colors"
+              href="/#nosotros"
+              onClick={(e) => navigate(e, '/', 'nosotros')}
+              className={linkClass(false)}
             >
               QUIÉNES SOMOS
             </a>
 
-            {/* Dropdown Productos */}
+            {/* Dropdown Productos -> /catalogo */}
             <div
               className="relative"
               onMouseEnter={() => setOpenDropdown('productos')}
               onMouseLeave={() => setOpenDropdown(null)}
             >
-              <button
-                type="button"
-                onClick={() => jumpToCrop('all')}
-                className="inline-flex items-center gap-1 px-3 py-2 text-xs font-bold uppercase tracking-wider text-brand-navy hover:text-brand-red transition-colors"
+              <a
+                href="/catalogo"
+                onClick={(e) => {
+                  e.preventDefault();
+                  jumpToCrop('all');
+                }}
+                className={`inline-flex items-center gap-1 ${linkClass(currentPath === '/catalogo')}`}
               >
-                <span>PRODUCTOS</span>
+                <span>CATÁLOGO</span>
                 <ChevronDown className="w-3.5 h-3.5" />
-              </button>
+              </a>
               {openDropdown === 'productos' && (
                 <div className="absolute left-0 top-full w-56 bg-white rounded-2xl shadow-2xl border border-stone-200 py-2 z-50">
                   {PRODUCT_SUBMENU.map((item) => (
@@ -115,22 +134,25 @@ export default function Navbar({ onSelectCropShortcut }) {
             </div>
 
             <a
-              href="#productos-2026"
-              className="px-3 py-2 text-xs font-bold uppercase tracking-wider text-brand-navy hover:text-brand-red transition-colors"
-            >
-              PRODUCTOS 2026
-            </a>
-
-            <a
-              href="#recomendador"
-              className="px-3 py-2 text-xs font-bold uppercase tracking-wider text-brand-navy hover:text-brand-red transition-colors"
+              href="/agro-point"
+              onClick={(e) => navigate(e, '/agro-point')}
+              className={linkClass(currentPath === '/agro-point')}
             >
               AGRO POINT
             </a>
 
             <a
-              href="#red-lider"
-              className="px-3 py-2 text-xs font-bold uppercase tracking-wider text-brand-navy hover:text-brand-red transition-colors"
+              href="/informes"
+              onClick={(e) => navigate(e, '/informes')}
+              className={linkClass(currentPath === '/informes')}
+            >
+              INFORMES
+            </a>
+
+            <a
+              href="/red-lider"
+              onClick={(e) => navigate(e, '/red-lider')}
+              className={linkClass(currentPath === '/red-lider')}
             >
               RED LÍDER
             </a>
@@ -142,8 +164,9 @@ export default function Navbar({ onSelectCropShortcut }) {
               onMouseLeave={() => setOpenDropdown(null)}
             >
               <a
-                href="#contacto"
-                className="inline-flex items-center gap-1 px-3 py-2 text-xs font-bold uppercase tracking-wider text-brand-navy hover:text-brand-red transition-colors"
+                href="/#contacto"
+                onClick={(e) => navigate(e, '/', 'contacto')}
+                className={`inline-flex items-center gap-1 ${linkClass(false)}`}
               >
                 <span>CONTACTO</span>
                 <ChevronDown className="w-3.5 h-3.5" />
@@ -151,15 +174,15 @@ export default function Navbar({ onSelectCropShortcut }) {
               {openDropdown === 'contacto' && (
                 <div className="absolute right-0 top-full w-60 bg-white rounded-2xl shadow-2xl border border-stone-200 py-2 z-50">
                   <a
-                    href="#contacto"
-                    onClick={() => setOpenDropdown(null)}
+                    href="/#contacto"
+                    onClick={(e) => navigate(e, '/', 'contacto')}
                     className="block px-4 py-2.5 text-xs font-bold text-brand-red hover:bg-brand-lightgray"
                   >
                     Envianos tu consulta
                   </a>
                   <a
-                    href="#contacto"
-                    onClick={() => setOpenDropdown(null)}
+                    href="/#contacto"
+                    onClick={(e) => navigate(e, '/', 'contacto')}
                     className="block px-4 py-2.5 text-xs font-bold text-brand-red hover:bg-brand-lightgray"
                   >
                     Trabajá con nosotros
@@ -216,8 +239,9 @@ export default function Navbar({ onSelectCropShortcut }) {
             </div>
 
             <a
-              href="#recomendador"
-              className="cast-btn-press hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-brand-red hover:bg-brand-darkred text-white text-xs font-extrabold uppercase tracking-wider shadow-red"
+              href="/agro-point"
+              onClick={(e) => navigate(e, '/agro-point')}
+              className="cast-btn-press hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-brand-red hover:bg-brand-darkred text-white text-xs font-extrabold uppercase tracking-wider shadow-red whitespace-nowrap"
             >
               <Compass className="w-3.5 h-3.5" />
               <span>Agro Point</span>
@@ -259,20 +283,24 @@ export default function Navbar({ onSelectCropShortcut }) {
               </div>
 
               {[
-                { href: '#inicio', label: 'HOME' },
-                { href: '#nosotros', label: 'QUIÉNES SOMOS' },
-                { href: '#catalogo', label: 'CULTIVOS Y CATÁLOGO' },
-                { href: '#productos-2026', label: 'PRODUCTOS 2026' },
-                { href: '#recomendador', label: 'AGRO POINT' },
-                { href: '#red-lider', label: 'RED LÍDER' },
-                { href: '#novedades', label: 'ENSAYOS & VIDEOS' },
-                { href: '#contacto', label: 'CONTACTO' },
+                { path: '/', hash: 'inicio', label: 'HOME' },
+                { path: '/', hash: 'nosotros', label: 'QUIÉNES SOMOS' },
+                { path: '/catalogo', hash: null, label: 'CATÁLOGO TÉCNICO' },
+                { path: '/agro-point', hash: null, label: 'AGRO POINT (RECOMENDADOR)' },
+                { path: '/informes', hash: null, label: 'INFORMES TÉCNICOS' },
+                { path: '/red-lider', hash: null, label: 'RED LÍDER LG' },
+                { path: '/', hash: 'novedades', label: 'VIDEOS Y NOVEDADES' },
+                { path: '/', hash: 'contacto', label: 'CONTACTO' },
               ].map((item) => (
                 <a
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="flex items-center justify-between min-h-[44px] px-4 py-2.5 rounded-xl text-sm font-bold tracking-wider text-stone-100 hover:bg-brand-red hover:text-white transition-colors"
+                  key={item.label}
+                  href={item.hash ? `${item.path}#${item.hash}` : item.path}
+                  onClick={(e) => navigate(e, item.path, item.hash)}
+                  className={`flex items-center justify-between min-h-[44px] px-4 py-2.5 rounded-xl text-sm font-bold tracking-wider transition-colors ${
+                    !item.hash && currentPath === item.path
+                      ? 'bg-brand-red text-white'
+                      : 'text-stone-100 hover:bg-brand-red hover:text-white'
+                  }`}
                 >
                   <span>{item.label}</span>
                   <ChevronRight className="w-4 h-4 text-brand-coral" />

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BookOpen, Clock, ArrowRight, X, Play } from 'lucide-react';
+import { BookOpen, Clock, ArrowRight, ArrowLeft, X, Play } from 'lucide-react';
 import { apiService } from '../services/api.js';
 
 const FEATURED_VIDEOS = [
@@ -25,12 +25,13 @@ const FEATURED_VIDEOS = [
   },
 ];
 
-export default function NewsSection() {
+export default function NewsSection({ mode = 'home', onNavigate }) {
   const [articles, setArticles] = useState([]);
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [loadedVideos, setLoadedVideos] = useState({});
 
   useEffect(() => {
+    if (mode !== 'reports') return undefined;
     let active = true;
     apiService.getArticles().then((items) => {
       if (active) setArticles(items);
@@ -38,142 +39,159 @@ export default function NewsSection() {
     return () => {
       active = false;
     };
-  }, []);
+  }, [mode]);
 
-  return (
-    <section id="novedades" className="py-14 sm:py-20 bg-white border-b border-stone-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-        {/* Bloque 1: Los 2 Videos / Novedades principales de la captura oficial */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12">
-          {FEATURED_VIDEOS.map((vid) => {
-            const isActivated = Boolean(loadedVideos[vid.id]);
-            return (
-              <article key={vid.id} className="flex flex-col justify-between">
-                <div className="space-y-5">
-                  {/* Reproductor interactivo YouTube con portada nítida y carga al hacer clic (ultra rápido en Lighthouse/Playwright) */}
-                  <div className="relative rounded-2xl overflow-hidden bg-brand-navy aspect-video shadow-card border border-stone-200 group">
-                    {isActivated ? (
-                      <iframe
-                        src={`${vid.embedUrl}?autoplay=1`}
-                        title={vid.title}
-                        className="w-full h-full"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      />
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={() => setLoadedVideos((prev) => ({ ...prev, [vid.id]: true }))}
-                        aria-label={`Reproducir video: ${vid.title}`}
-                        className="relative w-full h-full block text-left"
-                      >
-                        <img
-                          src={`https://i.ytimg.com/vi/${vid.id}/hqdefault.jpg`}
-                          alt={vid.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+  if (mode === 'home') {
+    return (
+      <section id="novedades" className="py-14 sm:py-20 bg-white border-b border-stone-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Bloque oficial: 2 Videos / Novedades principales */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12">
+            {FEATURED_VIDEOS.map((vid) => {
+              const isActivated = Boolean(loadedVideos[vid.id]);
+              return (
+                <article key={vid.id} className="flex flex-col justify-between">
+                  <div className="space-y-5">
+                    <div className="relative rounded-2xl overflow-hidden bg-brand-navy aspect-video shadow-card border border-stone-200 group">
+                      {isActivated ? (
+                        <iframe
+                          src={`${vid.embedUrl}?autoplay=1`}
+                          title={vid.title}
+                          className="w-full h-full"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/40" />
-                        <div className="absolute top-3 left-3 right-3 flex items-center gap-2.5">
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => setLoadedVideos((prev) => ({ ...prev, [vid.id]: true }))}
+                          aria-label={`Reproducir video: ${vid.title}`}
+                          className="relative w-full h-full block text-left"
+                        >
                           <img
-                            src="/favicon.png"
-                            alt=""
-                            className="w-7 h-7 rounded-full bg-white p-0.5 object-contain"
+                            src={`https://i.ytimg.com/vi/${vid.id}/hqdefault.jpg`}
+                            alt={vid.title}
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                           />
-                          <span className="text-xs sm:text-sm font-bold text-white line-clamp-1 drop-shadow">
-                            {vid.title}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/40" />
+                          <div className="absolute top-3 left-3 right-3 flex items-center gap-2.5">
+                            <img
+                              src="/favicon.png"
+                              alt=""
+                              className="w-7 h-7 rounded-full bg-white p-0.5 object-contain"
+                            />
+                            <span className="text-xs sm:text-sm font-bold text-white line-clamp-1 drop-shadow">
+                              {vid.title}
+                            </span>
+                          </div>
+                          <span className="absolute inset-0 flex items-center justify-center">
+                            <span className="w-16 h-11 rounded-2xl bg-brand-red group-hover:bg-brand-darkred flex items-center justify-center shadow-2xl transition-transform duration-200 group-hover:scale-110">
+                              <Play className="w-6 h-6 text-white fill-white ml-0.5" />
+                            </span>
                           </span>
-                        </div>
-                        <span className="absolute inset-0 flex items-center justify-center">
-                          <span className="w-16 h-11 rounded-2xl bg-brand-red group-hover:bg-brand-darkred flex items-center justify-center shadow-2xl transition-transform duration-200 group-hover:scale-110">
-                            <Play className="w-6 h-6 text-white fill-white ml-0.5" />
-                          </span>
-                        </span>
-                      </button>
-                    )}
+                        </button>
+                      )}
+                    </div>
+
+                    <div className="space-y-3">
+                      <h3 className="font-display font-bold text-xl sm:text-2xl text-brand-red leading-snug">
+                        <a
+                          href={vid.externalUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:underline"
+                        >
+                          {vid.title}
+                        </a>
+                      </h3>
+                      <p className="text-sm sm:text-base text-brand-gray leading-relaxed">
+                        {vid.description}
+                      </p>
+                    </div>
                   </div>
 
-                  <div className="space-y-3">
-                    <h3 className="font-display font-bold text-xl sm:text-2xl text-brand-red leading-snug">
-                      <a
-                        href={vid.externalUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:underline"
-                      >
-                        {vid.title}
-                      </a>
-                    </h3>
-                    <p className="text-sm sm:text-base text-brand-gray leading-relaxed">
-                      {vid.description}
-                    </p>
+                  <div className="mt-6 pt-4 border-t border-stone-200">
+                    <a
+                      href={vid.externalUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-3 text-xs sm:text-sm font-extrabold uppercase tracking-wider text-brand-red hover:text-brand-darkred group"
+                    >
+                      <span>{vid.ctaLabel}</span>
+                      <img
+                        src="/assets/misc/arrow-right.png"
+                        alt="→"
+                        className="w-5 h-auto object-contain transition-transform duration-200 group-hover:translate-x-1.5"
+                      />
+                    </a>
                   </div>
-                </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
-                <div className="mt-6 pt-4 border-t border-stone-200">
-                  <a
-                    href={vid.externalUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 text-xs sm:text-sm font-extrabold uppercase tracking-wider text-brand-red hover:text-brand-darkred group"
-                  >
-                    <span>{vid.ctaLabel}</span>
-                    <img
-                      src="/assets/misc/arrow-right.png"
-                      alt="→"
-                      className="w-5 h-auto object-contain transition-transform duration-200 group-hover:translate-x-1.5"
-                    />
-                  </a>
-                </div>
-              </article>
-            );
-          })}
+  // Página independiente: /informes
+  return (
+    <section id="informes" className="py-12 sm:py-16 bg-brand-cream min-h-[70vh]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-stone-200 pb-6">
+          <div className="max-w-2xl">
+            <button
+              type="button"
+              onClick={() => onNavigate?.('/')}
+              className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-gray hover:text-brand-red mb-3 transition-colors"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" />
+              <span>Volver al Inicio</span>
+            </button>
+            <div>
+              <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-red">
+                <BookOpen className="w-4 h-4" />
+                Agro Point · Conocimiento Agronómico
+              </span>
+              <h1 className="font-display font-extrabold text-2xl sm:text-4xl text-brand-navy mt-1.5 tracking-tight">
+                Informes técnicos, ensayos y Buenas Prácticas Agrícolas
+              </h1>
+            </div>
+          </div>
         </div>
 
-        {/* Bloque 2: Informes Técnicos Agro Point */}
-        <div className="pt-8 border-t border-stone-200">
-          <div className="max-w-2xl mb-7">
-            <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-red">
-              <BookOpen className="w-4 h-4" />
-              Agro Point · Conocimiento Agronómico
-            </span>
-            <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-brand-navy mt-1 tracking-tight">
-              Informes técnicos, ensayos y Buenas Prácticas Agrícolas
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {articles.map((article) => (
-              <article
-                key={article.id}
-                className="cast-card bg-brand-lightgray/70 rounded-3xl border border-stone-200 p-6 shadow-sm hover:bg-white hover:shadow-card hover:border-brand-red/40 flex flex-col justify-between gap-4"
-              >
-                <div className="space-y-2.5">
-                  <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
-                    <span className="px-2.5 py-1 rounded-lg bg-red-50 border border-red-200 text-brand-red font-bold">
-                      {article.tag}
-                    </span>
-                    <span className="inline-flex items-center gap-1 text-brand-gray font-medium">
-                      <Clock className="w-3.5 h-3.5" />
-                      {article.readTime}
-                    </span>
-                  </div>
-                  <h3 className="font-display font-bold text-lg text-brand-navy leading-snug">
-                    {article.title}
-                  </h3>
-                  <p className="text-sm text-brand-gray leading-relaxed">{article.excerpt}</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {articles.map((article) => (
+            <article
+              key={article.id}
+              className="cast-card bg-white rounded-3xl border border-stone-200 p-6 shadow-sm hover:shadow-card hover:border-brand-red/40 flex flex-col justify-between gap-4"
+            >
+              <div className="space-y-2.5">
+                <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
+                  <span className="px-2.5 py-1 rounded-lg bg-red-50 border border-red-200 text-brand-red font-bold">
+                    {article.tag}
+                  </span>
+                  <span className="inline-flex items-center gap-1 text-brand-gray font-medium">
+                    <Clock className="w-3.5 h-3.5" />
+                    {article.readTime}
+                  </span>
                 </div>
+                <h2 className="font-display font-bold text-lg text-brand-navy leading-snug">
+                  {article.title}
+                </h2>
+                <p className="text-sm text-brand-gray leading-relaxed">{article.excerpt}</p>
+              </div>
 
-                <button
-                  type="button"
-                  onClick={() => setSelectedArticle(article)}
-                  className="cast-btn-arrow self-start min-h-[40px] inline-flex items-center gap-1.5 text-sm font-bold text-brand-red hover:text-brand-darkred transition-colors"
-                >
-                  <span>Leer informe completo</span>
-                  <ArrowRight className="w-4 h-4 arrow-icon" />
-                </button>
-              </article>
-            ))}
-          </div>
+              <button
+                type="button"
+                onClick={() => setSelectedArticle(article)}
+                className="cast-btn-arrow self-start min-h-[40px] inline-flex items-center gap-1.5 text-sm font-bold text-brand-red hover:text-brand-darkred transition-colors"
+              >
+                <span>Leer informe completo</span>
+                <ArrowRight className="w-4 h-4 arrow-icon" />
+              </button>
+            </article>
+          ))}
         </div>
       </div>
 

@@ -1,21 +1,30 @@
 import { Instagram, Twitter, Linkedin } from 'lucide-react';
 import { clientEnv } from '../config/env.js';
 
-export default function Footer({ onSelectCrop }) {
+export default function Footer({ onSelectCrop, onNavigate }) {
   const year = new Date().getFullYear();
+
+  const handleLink = (e, path, hash = null) => {
+    e.preventDefault();
+    onNavigate?.(path, hash);
+  };
 
   const handleCropJump = (crop) => {
     onSelectCrop?.(crop);
-    document.getElementById('catalogo')?.scrollIntoView({ behavior: 'smooth' });
+    onNavigate?.('/catalogo');
   };
 
   return (
     <footer className="bg-white text-brand-gray border-t border-stone-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-10">
-          {/* Columna marca oficial (logo rojo + descripción) */}
+          {/* Columna marca oficial */}
           <div className="md:col-span-4 space-y-4">
-            <a href="#inicio" className="inline-block">
+            <a
+              href="/"
+              onClick={(e) => handleLink(e, '/', 'inicio')}
+              className="inline-block"
+            >
               <img
                 src="/assets/logo/logo3.png"
                 alt="LG Semillas — Limagrain"
@@ -27,32 +36,67 @@ export default function Footer({ onSelectCrop }) {
             </p>
           </div>
 
-          {/* LINKS (exacto al diseño oficial en 2 subcolumnas) */}
+          {/* LINKS */}
           <div className="md:col-span-3">
             <h3 className="font-display font-bold text-brand-red text-xs uppercase tracking-widest mb-4">
               LINKS
             </h3>
             <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs sm:text-sm text-brand-gray">
-              <a href="#inicio" className="hover:text-brand-red transition-colors">
+              <a
+                href="/"
+                onClick={(e) => handleLink(e, '/', 'inicio')}
+                className="hover:text-brand-red transition-colors"
+              >
                 Inicio
               </a>
-              <a href="#red-lider" className="hover:text-brand-red transition-colors">
+              <a
+                href="/red-lider"
+                onClick={(e) => handleLink(e, '/red-lider')}
+                className="hover:text-brand-red transition-colors"
+              >
                 Red Líder
               </a>
-              <a href="#nosotros" className="hover:text-brand-red transition-colors">
+              <a
+                href="/#nosotros"
+                onClick={(e) => handleLink(e, '/', 'nosotros')}
+                className="hover:text-brand-red transition-colors"
+              >
                 Quiénes Somos
               </a>
-              <a href="#novedades" className="hover:text-brand-red transition-colors">
+              <a
+                href="/informes"
+                onClick={(e) => handleLink(e, '/informes')}
+                className="hover:text-brand-red transition-colors"
+              >
+                Informes
+              </a>
+              <a
+                href="/catalogo"
+                onClick={(e) => handleLink(e, '/catalogo')}
+                className="hover:text-brand-red transition-colors"
+              >
+                Catálogo
+              </a>
+              <a
+                href="/#novedades"
+                onClick={(e) => handleLink(e, '/', 'novedades')}
+                className="hover:text-brand-red transition-colors"
+              >
                 Novedades
               </a>
-              <a href="#productos-2026" className="hover:text-brand-red transition-colors">
-                Productos
-              </a>
-              <a href="#contacto" className="hover:text-brand-red transition-colors">
-                Contacto
-              </a>
-              <a href="#recomendador" className="hover:text-brand-red transition-colors">
+              <a
+                href="/agro-point"
+                onClick={(e) => handleLink(e, '/agro-point')}
+                className="hover:text-brand-red transition-colors"
+              >
                 Agro Point
+              </a>
+              <a
+                href="/#contacto"
+                onClick={(e) => handleLink(e, '/', 'contacto')}
+                className="hover:text-brand-red transition-colors"
+              >
+                Contacto
               </a>
               <a
                 href={clientEnv.ethicsUrl}

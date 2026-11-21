@@ -142,12 +142,10 @@ export default function Hero({ onQuickSearch, onSelectCrop }) {
   const handleSearch = (e) => {
     e.preventDefault();
     onQuickSearch?.(query);
-    document.getElementById('productos-2026')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleCropShortcut = (cropId) => {
     onSelectCrop?.(cropId);
-    document.getElementById('productos-2026')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
