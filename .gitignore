@@ -8,6 +8,9 @@ dist/
 client/dist/
 build/
 .netlify/
+client/test-results/
+client/playwright-report/
+client/screenshots/
 
 # Variables de entorno reales (versionar solo .env.template)
 .env

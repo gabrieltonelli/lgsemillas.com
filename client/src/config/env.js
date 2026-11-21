@@ -8,6 +8,7 @@ export const clientEnv = {
   contactEmail: import.meta.env.VITE_PUBLIC_CONTACT_EMAIL || 'lgsemillas@limagrain.com',
   phone: import.meta.env.VITE_PUBLIC_PHONE || '+54 2477 430000',
   whatsapp: (import.meta.env.VITE_PUBLIC_WHATSAPP || '5492477430000').replace(/\D/g, ''),
+  whatsappShortlink: import.meta.env.VITE_WHATSAPP_SHORTLINK || 'https://wa.link/x5ez2m',
   hqAddress:
     import.meta.env.VITE_PUBLIC_HQ_ADDRESS ||
     'Ruta 32 Km. 2, (2700) Pergamino, Provincia de Buenos Aires, Argentina',

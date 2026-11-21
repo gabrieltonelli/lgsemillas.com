@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
+import AboutSection from './components/AboutSection.jsx';
 import ProductCatalog from './components/ProductCatalog.jsx';
 import AgroAdvisor from './components/AgroAdvisor.jsx';
-import AboutSection from './components/AboutSection.jsx';
-import RedLiderMap from './components/RedLiderMap.jsx';
 import NewsSection from './components/NewsSection.jsx';
+import RedLiderMap from './components/RedLiderMap.jsx';
 import ContactSection from './components/ContactSection.jsx';
 import Footer from './components/Footer.jsx';
+import WhatsAppChatbot from './components/WhatsAppChatbot.jsx';
 import { apiService } from './services/api.js';
 import { FALLBACK_COMPANY } from './data/fallbackData.js';
 
@@ -16,6 +17,7 @@ export default function App() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [prefilledInquiry, setPrefilledInquiry] = useState(null);
+  const [compareCount, setCompareCount] = useState(0);
 
   useEffect(() => {
     let active = true;
@@ -34,6 +36,10 @@ export default function App() {
     setSearchTerm(query);
   };
 
+  const handleNavigateSection = (sectionId) => {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   const handleRequestQuote = (product) => {
     const categoryNameMap = {
       maiz: 'Maíz Grano',
@@ -48,7 +54,7 @@ export default function App() {
       message: `Quisiera recibir asesoramiento técnico y disponibilidad comercial sobre ${product.name} (${product.technology}).`,
       stamp: Date.now(),
     });
-    document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' });
+    handleNavigateSection('contacto');
   };
 
   const handleSelectDistributor = (dist) => {
@@ -58,11 +64,11 @@ export default function App() {
       message: `Quisiera ponerme en contacto con el distribuidor Red Líder LG "${dist.name}" (${dist.city}) por disponibilidad de semillas.`,
       stamp: Date.now(),
     });
-    document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' });
+    handleNavigateSection('contacto');
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-stone-50 text-slate-900 overflow-x-hidden">
+    <div className="min-h-screen flex flex-col bg-white text-brand-navy overflow-x-hidden">
       <Navbar onSelectCropShortcut={setSelectedCategory} />
 
       <main className="flex-1">
@@ -72,6 +78,8 @@ export default function App() {
           onSelectCrop={setSelectedCategory}
         />
 
+        <AboutSection company={company} />
+
         <ProductCatalog
           selectedCategory={selectedCategory}
           onCategoryChange={setSelectedCategory}
@@ -79,6 +87,7 @@ export default function App() {
           onSearchChange={setSearchTerm}
           regions={company.regions}
           onRequestQuote={handleRequestQuote}
+          compareCountChange={setCompareCount}
         />
 
         <AgroAdvisor
@@ -86,11 +95,9 @@ export default function App() {
           onSelectRecommended={handleRequestQuote}
         />
 
-        <AboutSection company={company} />
+        <NewsSection />
 
         <RedLiderMap onSelectDistributor={handleSelectDistributor} />
-
-        <NewsSection />
 
         <ContactSection
           prefilledInquiry={prefilledInquiry}
@@ -99,7 +106,12 @@ export default function App() {
       </main>
 
       <Footer onSelectCrop={setSelectedCategory} />
+
+      <WhatsAppChatbot
+        hasCompareBar={compareCount > 0}
+        onSelectCrop={setSelectedCategory}
+        onNavigateSection={handleNavigateSection}
+      />
     </div>
   );
 }
-

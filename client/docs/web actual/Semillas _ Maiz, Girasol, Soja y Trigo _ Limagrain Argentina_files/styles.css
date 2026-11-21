@@ -1,0 +1,660 @@
+.txt-note-title-second-column { margin-top: 18px; }
+
+@media (max-width: 768px) {
+	.img-productos-2022 { display: block; margin: auto; }
+}
+
+.nuevo { display: inline-block; width: 37px; height: 18px; margin-left: 10px; position: absolute; background: url(../../assets/img/productos/nuevo.png); background-size: contain; background-repeat: no-repeat; }
+
+@media (max-width: 1200px) {
+	.contenedor-items-productos .col-md-4 { width: 100% !important; }
+}
+
+@media (max-width: 380px) {
+	.nuevo { display: none !important; }
+}
+
+.espacio-vacio { height: 45px; }
+
+.titulo-fuente { font-family: 'Conv_Microbrew-Soft-Four',Sans-Serif !important; color: #fff; font-weight: normal; font-size: 55px !important; line-height: 0; letter-spacing: -1px; margin-bottom: 20px; margin-top: 40px; text-shadow: 3px 3px 9px rgb(150 150 150); }
+
+.titulo-fuente.texto-rojo { color: #ff0000 !important; }
+
+.titulo-cebada { margin-top: 60px; }
+
+@media (max-width: 991px) {
+	.titulo-fuente.titulo-trigo { color: #fff !important; }
+	.titulo-fuente.titulo-soja { color: #ff0000 !important; }
+	.bg-color1 { background-color: #E3002C !important; }
+	.bajada-trigo { color: #fff !important; }
+	.fondo-vacio { display: none; }
+}
+
+@media (max-width: 680px) {
+	.titulo-cebada { margin-top: 40px; padding-bottom: 20px; }
+}
+
+.fondo-vacio { background-image: url(../../assets/img/home/680x190_a.jpg); background-repeat: no-repeat; background-size: cover; background-position: bottom; }
+
+@media (max-width: 768px) {
+	#mobile-tabs-link { padding-left: 0 !important; padding-right: 0; width: 100%; margin: auto; text-align: center; }
+	#mobile-tabs-link .tab-button { width: 55px !important; height: 55px !important; background-size: 50px; float: none !important; }
+}
+
+/*@media (max-width: 575px) {
+    #mobile-tabs-link .tab-button { width: 55px !important; height: 55px !important; background-size: 50px; float: none !important; }
+}*/
+
+
+.whatsapp-custom { position: fixed; width: 60px; line-height: 60px; height: 60px; bottom: 65px; right: 40px; background-color: #25d366; border-radius: 50px; text-align: center; font-size: 30px; z-index: 100; color: #fff !important; }
+
+.whatsapp-custom i { color: #fff !important; margin-top: 15px; }
+
+.whatsapp-custom i:hover { color: #fff !important; }
+
+@media (max-width: 575px) {
+	.whatsapp-custom { bottom: 110px; right: 15px; }
+}
+
+@media (max-width: 1200px) {
+	footer .pading-fluid { padding-left: 15px; padding-right: 15px; }
+}
+
+.titular {font-family: 'Conv_Microbrew-Soft-Four',Sans-Serif !important;color: #fff;font-weight: normal;font-size: 62px;line-height: 0;letter-spacing: -1px;margin-bottom: 20px;margin-top: 40px;text-shadow: 3px 3px 9px rgb(150 150 150);}
+
+@media (max-width: 767px) {
+	.email-lg { height: auto !important; }
+	
+	section.contact .container-fluid #col-email-lg { padding-top: 20px !important; }
+
+	section.contact .container-fluid > div:not(.clearfix) { padding: 35px 0 !important; }
+}
+
+/*Header styles*/
+
+.main-header .col-xl-3 { max-width: 22%!important; }
+
+@media (max-width: 1400px){
+
+	.main-header .col-xl-3 { max-width: 16%!important; }
+
+}
+
+@media(max-width: 1200px){
+
+ .main-header .col-xl-3 { max-width: 100%!important; }
+
+}
+
+/*End header styles*/
+
+
+/* sección mir */
+
+.mb-100 { margin-bottom: 100px !important; }
+
+.contenido-mir { padding: 0; }
+
+.contenido-mir .primer-columna { background: #f3f3f3; padding-left: 10%; padding-top: 85px; padding-bottom: 85px; padding-right: 90px; }
+
+.contenido-mir .segunda-columna { background: #fafafa; padding-top: 75px; padding-bottom: 75px; display: flex; align-items: center; }
+
+.contenido-mir .contents { padding: 60px 0; }
+
+.contenido-mir .contenido-titulo { display: flex; align-items: center; margin-bottom: 40px; line-height: 35px; }
+
+.contenido-mir .titulo-principal-mir { margin-top: 0; margin-bottom: 0; font-family: 'Archivo Narrow', sans-serif !important; font-size: 33px !important; }
+
+.contenido-mir .main-container { margin-top: 0; margin-bottom: 0; width: 81.3%; }
+
+.contenido-mir .loguito-semillas { width: 50px; margin-right: 13px; }
+
+.contenido-mir .imagen-mir { width: 600px; }
+
+.contenido-mir .logo-mir { margin-top: 10px; display: block; width: 70px; }
+
+.contenido-mir .contenido-grafico { position: relative; margin: auto; text-align: center; max-width: 600px; }
+
+.contenido-mir .texto { font-family: 'Calibri', sans-serif !important; }
+
+@media (max-width: 1750px) {
+    .contenido-mir .primer-columna { padding-top: 50px; padding-bottom: 50px;  }
+}
+
+
+@media (max-width: 1400px) {
+	.contenido-mir-interna .main-container { padding-left: 20px; padding-right: 20px; margin-left: 0; width: 100%; }
+
+	.contenido-mir-interna .primer-columna { padding-left: 20px; }
+}
+
+
+@media (max-width: 1200px) {
+	.contenido-mir .contenido-grafico { max-width: 100%; }
+
+	.contenido-mir .imagen-mir { width: 100%; }
+
+	.contenido-mir .row { flex-wrap: wrap; }
+
+	.contenido-mir .primer-columna { padding-right: 10%; }
+
+	.contenido-mir .contents { padding: 20px 0; }
+}
+
+@media (max-width: 510px) {
+	.contenido-mir .contenido-titulo { flex-wrap: wrap; }
+
+	.contenido-mir .titulo-principal-mir { margin-top: 10px; }
+}
+
+/* fin sección mir */
+
+/*Sección contenido mirc*/
+
+.contenido-mir .contenido-titulo-mirc { display: flex; align-items: center; margin-bottom: 15px; line-height: 35px; }
+
+.contenido-mir .titulo-principal-mirc { margin: auto; font-family: 'Archivo Narrow', sans-serif !important; font-size: 33px !important; }
+
+.contenido-mir .texto-mirc { font-family: 'Calibri', sans-serif !important; text-align: center; }
+
+.contenido-mir .h2-mirc { text-align: center; color: #000 !important; font-size: 19px !important; margin-bottom: 40px; }
+
+.contenido-mir .tercer-columna { background: #f3f3f3; }
+
+@media (max-width: 1200px) {
+
+.contenido-mir .texto-mirc { max-width: 700px; margin: auto; }
+
+}
+
+@media (max-width: 510px) {
+	.contenido-mir .contenido-titulo-mirc { flex-wrap: wrap; }
+
+	.contenido-mir .titulo-principal-mirc { margin-top: 10px; font-size: 25px!important; }
+
+	.contenido-mir .h2-mirc { font-size: 16px!important; }
+}
+
+/*Fin sección contenido mirc*/
+
+
+
+.mobile-nav-activated [data-mobile-nav-style=modern] #wrap { transform: translate3d(-100vw, 0, 0) !important; }
+
+[data-mobile-nav-style=modern] .navbar-collapse-clone { width: 100vw !important; } 
+
+
+
+
+/* estilos de agro - chinche de los cuernos */
+
+.agro-point-tabs-marker img { width: 40px; margin-right: 10px; text-transform: none; }
+
+.productos-page .categorias-agro .card-header .agro-point-tabs-marker { font-family: 'Archivo Narrow', sans-serif !important; color: #000 !important; text-transform: none !important; }
+
+.productos-page .categorias-agro .card-header span { width: calc(100% - 30px - 155px); left: 155px; top: 20px; }
+
+.productos-page .categorias-agro .card-header i { margin-top: 10px; }
+
+
+
+.titulo-agro-chinche { font-family: 'Archivo Narrow', sans-serif !important; font-size: 29px !important; line-height: 29px; color: var(--rojo) !important; font-weight: 600; margin-top: 0; margin-bottom: 15px; }
+
+.bajada-agro-chinche { font-family: 'Archivo Narrow', sans-serif !important; color: #6f6f6e; font-style: italic; font-size: 25px; line-height: 27px; margin-bottom: 40px; }
+
+.imagen-agro-chinche { width: 100%; }
+
+.productos-page .contenido > div:first-of-type .titulo-chinche { margin-top: 0 !important; font-family: 'Archivo Narrow', sans-serif !important; font-weight: 400; font-size: 30px !important; text-transform: none; }
+
+.bloquecito-hospedantes { display: flex; align-items: center; padding: 20px; background: #f3f3f3; }
+
+.productos-page .bloquecito-hospedantes > div:first-of-type h4 { font-size: 18px !important; color: var(--rojo) !important; margin-bottom: 10px !important; font-weight: bold; }
+
+.hospedantes-items { font-weight: bold; margin-bottom: 0; }
+
+.info-interno-hospedantes { padding-left: 30px; padding-right: 30px; }
+
+
+.info-interna-chinche { margin-top: 50px; }
+
+
+
+.bloques-flechas-chinche { position: relative; margin-bottom: 40px; }
+
+.bloques-flechas-chinche img { width: 100%; }
+
+.bloques-flechas-chinche p { color: #000; margin-bottom: 0 !important; position: absolute; }
+
+.bloques-flechas-chinche .ng { text-transform: uppercase; color: #000; top: 50%; transform: translateY(-50%); left: 30px; }
+
+.bloques-flechas-chinche .rj { color: #fff; top: 50%; transform: translateY(-50%); /*right: 100px;*/ left: 55%; }
+
+
+
+
+#bloquecito-daño { padding: 40px 0; }
+
+#bloquecito-daño h4 { font-size: 18px !important; color: var(--rojo) !important; margin-bottom: 10px !important; font-weight: bold; }
+
+#bloquecito-daño p { margin-bottom: 0; }
+
+
+.contenido-chinche-sidebar { padding: 35px 30px; background: var(--rojo); }
+
+#contenido-chinche-sidebar h4 { font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif !important; color: #fff !important; font-weight: bold; font-size: 18px !important; margin-bottom: 15px; }
+
+#contenido-chinche-sidebar p { color: #fff !important; margin-bottom: 0; }
+
+.chinche-sidebar img { width: 100%; }
+
+
+#contenido-control-sidebar { margin-top: 40px; }
+
+#contenido-control-sidebar h4 { font-size: 18px !important; color: var(--rojo) !important; margin-bottom: 10px !important; text-transform: uppercase; font-weight: bold; }
+
+.agro-cuernos-btn { margin-top: 40px; background: var(--rojo) !important; color: #fff; border: 0; text-transform: uppercase; font-weight: 500; font-size: 16px; line-height: 40px; padding: 0 15px; }
+
+.agro-cuernos-btn i { color: #fff !important; line-height: 40px; margin-left: 10px; }
+
+.agro-cuernos-btn:hover { transform: translateY(-1px);
+    -webkit-box-shadow: 0px 1px 1px rgb(0 0 0 / 5%), 0px 2px 2px rgb(0 0 0 / 5%), 0px 4px 4px rgb(0 0 0 / 5%), 0px 8px 8px rgb(0 0 0 / 5%), 0px 16px 16px rgb(0 0 0 / 5%);
+    box-shadow: 0px 1px 1px rgb(0 0 0 / 5%), 0px 2px 2px rgb(0 0 0 / 5%), 0px 4px 4px rgb(0 0 0 / 5%), 0px 8px 8px rgb(0 0 0 / 5%), 0px 16px 16px rgb(0 0 0 / 5%) }
+
+.agro-cuernos-btn.show-mobile { display: none; }
+
+.no-margin-bottom { margin-bottom: 0; }
+
+@media (min-width: 992px) and (max-width: 1200px) {
+	.bloquecito-hospedantes { flex-wrap: wrap; }
+
+	.bloquecito-hospedantes img { width: 100%; }
+
+	.info-interno-hospedantes { padding-left: 0; padding-right: 0; }
+}
+
+
+.bloques-flechas-chinche.mostrar-mobile { display: none; }
+
+.info-interno-hospedantes h4 { width: 100% !important; }
+
+@media (max-width: 991px) {
+	.bloques-flechas-chinche.mostrar-desktop { display: none; }
+
+	.bloques-flechas-chinche.mostrar-mobile { display: block; }
+
+    .categorias-agro { width: 100%; }
+
+    .bloques-flechas-chinche img { display: none; }
+
+    .bloques-flechas-chinche { margin-top: 80px; margin-bottom: 0; }
+
+    .bloques-flechas-chinche .ng { background: #dedede; position: relative; left: 0; padding: 20px; }
+
+    .bloques-flechas-chinche .rj { background: #d51936; position: relative; right: 0; padding: 20px; left: 0; }
+
+    .agro-cuernos-btn.show-mobile { display: table; margin-top: 40px; }
+
+    .agro-cuernos-btn.show-desktop { display: none; }
+
+    .contenido-control-sidebar-chinche-cuernos { width: 100%; }
+
+    .contenido-control-sidebar-chinche-cuernos h4 { width: 100% !important; }
+
+
+}
+
+@media (max-width: 575px) {
+	.bloquecito-hospedantes { flex-wrap: wrap; }
+
+	.bloquecito-hospedantes img { width: 100%; }
+
+	.info-interno-hospedantes { padding-left: 0; padding-right: 0; margin-top: 20px; }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+	.info-interno-hospedantes h4 { margin-top: 20px !important; }
+}
+
+/* fin estilos de agro - chinche de los cuernos */
+
+
+
+/* estilos cancro de girasol */
+
+.bloquecito-biologia { margin-top: 25px; }
+
+.bloque-tablita-manejo-cancro table { border-collapse: separate; border-spacing: 2px; border: 0!important; width: 100%; }
+
+.bloque-tablita-manejo-cancro table td { border-right: 0 !important; background: #f3f3f3; font-size: 13px; font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; line-height: 1.4em; }
+
+.bloque-tablita-manejo-cancro table td span { display: block; }
+
+.bloque-tablita-manejo-cancro .main-td-table { font-size: 16px; }
+
+.bloque-tablita-manejo-cancro .amarillito { background: #d7df2f; min-width: 35px; text-align: center; display: block; margin-bottom: 6px; }
+
+.bloque-tablita-manejo-cancro .verdecito { background: #23dc27; min-width: 35px; text-align: center; display: block; margin-bottom: 6px; }
+
+.bloquecitos-tablita-inline { display: flex; align-items: center; justify-content: space-around; }
+
+.bloquecitos-tablita-inline:nth-child(2) span { margin-bottom: 0 !important; }
+
+.bloque-tablita-manejo-cancro .customs-paddings { padding: 0.45em 5px !important; }
+
+#contenido-control-sidebar.contenido-cancro-sidebar { margin-top: 20px; }
+
+#contenido-control-sidebar.contenido-cancro-sidebar p { margin-bottom: 10px !important; }
+
+
+
+.bloque-tablita-manejo-cancro { margin-top: 25px; }
+
+.comportamiento-txt-cancro { text-align: center; }
+
+.manejo-cancro-estados p { font-size: 13px; font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; line-height: 1.4em; }
+
+.manejo-cancro-estados .cuadradito-verde { background: #23dc27; width: 8px; height: 8px; display: inline-block; margin-left: 10px; }
+
+.manejo-cancro-estados .cuadradito-verde-claro { background: #d7df2f; width: 8px; height: 8px; display: inline-block; margin-left: 10px; }
+
+.manejo-cancro-estados .cuadradito-amarillo { background: #fffd38; width: 8px; height: 8px; display: inline-block; margin-left: 45px; }
+
+#info-interna-chinche { border-bottom: 0 !important; padding-bottom: 0; }
+
+#info-empresa-chinche { padding-top: 30px; padding-bottom: 80px; }
+
+#info-empresa-chinche .agro-cuernos-btn { margin-top: 25px; }
+
+.manejo-cancro-estados { margin-top: 10px; }
+
+
+.info-empresa-chinche .info-empresa { background: var(--rojo); padding: 40px 30px; }
+
+.info-empresa-chinche .info-empresa p { font-size: 22px; color: #fff; text-align: center; max-width: 960px; margin: auto;  margin-bottom: 0 !important; }
+
+
+
+.custom-table-responsive { max-width: 992px; overflow-x: auto; }
+
+@media (max-width: 1700px) {
+	.manejo-cancro-estados br { display: none; }
+
+    .manejo-cancro-estados .cuadradito-amarillo { margin-left: 10px; }
+}
+
+/* fin estilos cancro de girasol */
+
+
+
+/* estilos heladas tardías */
+
+.titulo-heladas-tardias { margin-bottom: 40px; }
+
+.bloquecito-meristema img { width: 100%; }
+
+.info-interno-meristema { background: var(--rojo); padding-top: 35px; padding-bottom: 40px; }
+
+.info-interno-meristema p { color: #fff; }
+
+.info-interno-meristema p:nth-child(2) { margin-bottom: 0; }
+
+.mas-info-meristema { margin-top: 40px; margin-bottom: 40px; }
+
+.info-interna-heladas-tardias p { margin-bottom: 15px; }
+
+
+
+.bloquecito-meristema { margin-top: 40px; }
+
+.bloquecito-meristema-02 .custom-bloque-personalizado { display: flex; }
+
+.bloquecito-meristema-02 img { width: 43%; }
+
+.bloquecito-meristema-02 .meristema-02-bloque-texto { width: 57%; background: var(--rojo); padding: 30px 40px; }
+
+.bloquecito-meristema-02 .meristema-02-bloque-texto p { color: #fff; }
+
+.mas-info-meristema-02 { margin-top: 40px; margin-bottom: 40px; }
+
+.mas-info-meristema-02 p { margin-bottom: 10px; }
+
+
+.dano-foliar-img { width: 100%; }
+
+.bloquecito-dano-foliar { margin-top: 40px; margin-bottom: 40px; }
+
+.bloquecito-dano-foliar .red-txt { color: var(--rojo); margin-bottom: 10px; font-weight: bold; font-size: 18px; }
+
+
+.grafico-porcentaje-perdidas { width: 100%; }
+
+
+.bloquecito-info-grafico-1 { background: var(--rojo); padding: 35px; }
+
+.bloquecito-info-grafico-1 p { color: #fff; margin-bottom: 0; }
+
+.bloquecito-susceptibilidad-estadios .red-txt { color: var(--rojo); margin-bottom: 10px; font-weight: bold; font-size: 18px; }
+
+.bloquecito-susceptibilidad-estadios { margin-top: 40px; }
+
+
+#consideraciones-finales-heladas { padding-top: 50px !important; }
+
+.titulo-consideraciones-finales-heladas { background: #f3f3f3; padding: 30px 0; margin-bottom: 40px; }
+
+.titulo-consideraciones-finales-heladas h3 { text-align: center; color: var(--rojo); font-size: 28px !important; font-weight: bold; margin-top: 0; margin-bottom: 0; }
+
+.consideraciones-finales-heladas .itemcitos p { display: flex; align-items: flex-start; }
+
+.consideraciones-finales-heladas .itemcitos img { margin-right: 10px; }
+
+.consideraciones-finales-heladas .itemcitos.no-padding-left { padding-left: 0; }
+
+.consideraciones-finales-heladas .itemcitos.no-padding-right { padding-right: 0; }
+
+.heladas-informe-link { margin-bottom: 70px; }
+
+@media (max-width: 1920px) {
+	#consideraciones-finales-heladas { padding-top: 25px !important; }
+}
+
+@media (max-width: 991px) {
+	#consideraciones-finales-heladas { padding-top: 25px !important; }
+
+	.titulo-consideraciones-finales-heladas { margin-left: 15px; margin-right: 15px; }
+
+    .consideraciones-finales-heladas .itemcitos.no-padding-left { padding-left: 15px; }
+
+    .consideraciones-finales-heladas .itemcitos.no-padding-right { padding-right: 15px; }
+}
+
+@media (max-width: 991px) {
+	.info-interno-meristema { padding-left: 30px; padding-right: 30px; margin-top: 0; }
+
+	.bloquecito-meristema-02 .custom-bloque-personalizado { flex-wrap: wrap; }
+
+	.bloquecito-meristema-02 img, .bloquecito-meristema-02 .meristema-02-bloque-texto { width: 100%; }
+}
+
+/* fin estilos heladas tardías */
+
+
+
+/* estilos eficiente picado maíz */
+
+.tablita-objetivo-picado-table-responsive { max-width: 100%; }
+
+.titulo-eficiente-picado-maiz { margin-bottom: 40px; }
+
+.img-objetivo-picado { display: block; margin: auto; margin-top: 20px; margin-bottom: 40px; }
+
+.tablita-objetivo-picado { border: 0; margin-top: 40px; width: 100%; }
+
+.tablita-objetivo-picado tr { background: #f3f3f3; }
+
+.tablita-objetivo-picado td { padding: 15px 30px !important; border-right: 0 !important; font-size: 16px; font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif; line-height: 1.4em; }
+
+.tablita-objetivo-picado .objetivo-picado-red-tr { background: #d51936; }
+
+.tablita-objetivo-picado .objetivo-picado-red-tr td { color: #fff; }
+
+.tablita-objetivo-picado .objetivo-picado-green-tr { background: #72cf4c; color: #fff; }
+
+.la-digestibilidad-txt { margin-bottom: 0; }
+
+.bloques-cuando-picar-chinche { margin-top: 40px; }
+
+.bloques-cuando-picar-chinche .rj { max-width: 350px; left: 33%; }
+
+.bloquecita-fundamental-conocer-comportamiento { margin-top: 40px; }
+
+.bloquecito-importancia-hibrido { padding: 20px 0 !important; }
+
+.productos-page .categorias-agro .card-body a { text-transform: none; }
+
+.custom-cat-active { font-weight: bold; }
+
+@media (max-width: 991px) {
+	.productos-page .categorias { padding-right: 20px; }
+
+	.productos-page .categorias-agro .card-body a { padding-left: 20px; padding-right: 20px; }
+
+	.custom-cat-active { background: var(--rojo); color: #fff; }
+
+	.productos-page .contenido { padding-left: 20px; }
+
+	.custom-cat-active:hover { color: #fff; background: #c40429; }
+}
+
+.parrafo-cosecha-60 { margin-top: 15px; }
+
+.eficiente-picado-maiz-btn { margin-top: 20px; }
+
+@media (max-width: 1600px) {
+	.bloques-cuando-picar-chinche .rj { max-width: 298px; }
+}
+
+@media (max-width: 1200px) {
+    .meristema-apica-img-02 { content: url('../img/agro/meristema-mob.png'); }
+
+    .bloquecito-meristema-02 .custom-bloque-personalizado { flex-wrap: wrap; }
+
+    .bloquecito-meristema-02 img, .bloquecito-meristema-02 .meristema-02-bloque-texto { width: 100%; }
+
+    .info-ataques-severos { margin-top: 20px; }
+}
+
+@media (max-width: 1130px) {
+	.bloques-flechas-chinche .ng { left: 15px; }
+}
+
+@media (max-width: 991px) {
+    .flexible-custom-container { display: flex; flex-wrap: wrap; }
+
+    .flexible-custom-container .contenido { margin-top: 15px !important; }
+
+    .bloques-cuando-picar-chinche .ng { left: 0; }
+
+	.bloques-cuando-picar-chinche .rj { max-width: 100%; left: 0; }
+
+	.bloques-cuando-picar-chinche { margin-top: 60px; }
+
+	.bloques-flechas-chinche .ng { left: 0; }
+
+	.bloques-flechas-chinche .ng br, .bloques-flechas-chinche .rj br { display: none; }
+}
+
+@media (max-width: 627px) {
+	.bloques-cuando-picar-chinche .ng { margin-bottom: 10px !important; }
+}
+
+/* fin estilos heladas picado maíz */
+
+
+body.productos-page .contenido .informacion-contenido-customizado h3, .informacion-contenido-customizado h4 { margin-bottom: 15px !important; }
+
+.performance-information-text { margin-bottom: 50px; }
+
+.performance-information-text .red-text { color: var(--rojo) !important; }
+
+/*.more-adaptation-zone-block h5 { float: none !important; }
+
+.more-adaptation-zone-block h5:nth-child(1) { margin-bottom: 0 !important; }
+
+.more-adaptation-zone-block .red-text { color: var(--rojo) !important; }
+
+.img-productos-2023-item { position: relative; left: 5px; }
+
+.informacion-contenido-customizado { padding-bottom: 25px !important; }
+
+.more-adaptation-zone-block { padding-top: 25px !important; }
+
+.more-adaptation-zone-block { display: flex; justify-content: space-between; }
+
+.map-information-container img { display: block; max-width: 160px; margin-top: 15px; }
+
+.performance-information-container .botones { margin-top: 30px; }
+
+@media (max-width: 1140px) {
+	.more-adaptation-zone-block { flex-wrap: wrap; }
+
+	.map-information-container { width: 100%; }
+}
+
+
+@media (max-width: 880px) {
+    .productos-page .contenido > div:nth-of-type(2) > img { margin-top: 0; }
+
+    .productos-page .contenido > div:nth-of-type(2) h5 { display: block; }
+}
+
+@media (max-width: 550px) {
+    .performance-information-container { width: 100%; }
+    
+    .map-information-container img { margin: auto; margin-top: 15px; }
+}*/
+
+
+.bg-bottom-item .liquid-parallax-figure { background-position: center bottom !important; }
+
+@media (max-width: 400px) {
+	body .valores-espaciado h2 { font-size: 65px !important; }
+}
+
+
+.principios-eticos-y-codigo-de-conduta .btn { background: #df052f; color: #fff; padding: 10px 35px; font-size: 18px; }
+
+.ethic-and-conduct-section .flex-wrap{flex-wrap: wrap; }
+
+.ethic-and-conduct-section .element-item{width: calc(100% / 4 - 44px); margin: 12px 0; text-align: center; }
+
+.ethic-and-conduct-section .element-item a{color: white; width:100%; display:block; cursor:pointer; padding:12px; outline: 1px solid #e3002c; background: #e3002c; transition: .8s}
+
+.ethic-and-conduct-section .element-item a:hover{background:white; color: #e3002c}
+
+.ethic-and-conduct-section{padding:60px 0}
+
+.ethic-and-conduct-section .row-gap{row-gap:20px}
+
+.ethic-and-conduct-section .column-gap{column-gap:20px}
+
+@media(max-width:1199px){
+	.ethic-and-conduct-section .element-item{width: calc(100% / 2 - 10px);}
+}
+
+@media(max-width:765px){
+	.ethic-and-conduct-section .element-item{width: 100%}
+}
+
+.products-year-title { text-transform: uppercase; font-family: 'Conv_Microbrew-Soft-Four',Sans-Serif !important; color: #fff !important; font-size: 90px !important; line-height: 0; letter-spacing: -1px; text-shadow: 3px 3px 9px rgb(150 150 150); --webkit-text-shadow: 3px 3px 9px rgb(150 150 150); margin-bottom: 40px !important; }
+
+@media (max-width: 765px) {
+	.products-year-title { font-size: 70px !important; text-align: center; }
+}
+
+@media (max-width: 575px) {
+	.products-year-title { font-size: 54px !important; }
+}
+
+
+.resiembra-styles { display: none; }

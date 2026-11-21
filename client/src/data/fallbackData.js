@@ -382,6 +382,8 @@ export const FALLBACK_DISTRIBUTORS = [
     address: 'Ruta Nac. 8 Km 225, Pergamino, Buenos Aires',
     phone: '+54 2477 42-1850',
     email: 'ventas@agrotecnicapergamino.com.ar',
+    lat: -33.902,
+    lng: -60.569,
     crops: ['Maíz', 'Maíz Silo', 'Trigo', 'Soja'],
   },
   {
@@ -394,6 +396,8 @@ export const FALLBACK_DISTRIBUTORS = [
     address: 'Av. Güemes 1420, Tres Arroyos, Buenos Aires',
     phone: '+54 2983 42-7740',
     email: 'contacto@insumossur.com.ar',
+    lat: -38.374,
+    lng: -60.279,
     crops: ['Girasol', 'Trigo', 'Maíz'],
   },
   {
@@ -406,6 +410,8 @@ export const FALLBACK_DISTRIBUTORS = [
     address: 'Ruta Nac. 8 Km 364, Venado Tuerto, Santa Fe',
     phone: '+54 3462 43-5520',
     email: 'comercial@pampahumeda.com.ar',
+    lat: -33.745,
+    lng: -61.969,
     crops: ['Maíz', 'Soja', 'Trigo', 'Maíz Silo'],
   },
   {
@@ -418,6 +424,8 @@ export const FALLBACK_DISTRIBUTORS = [
     address: 'Ruta A005 Km 4.5, Río Cuarto, Córdoba',
     phone: '+54 358 464-7100',
     email: 'asesoria@imperiodelsur.com.ar',
+    lat: -33.13,
+    lng: -64.35,
     crops: ['Maíz', 'Maíz Silo', 'Soja', 'Trigo'],
   },
   {
@@ -430,6 +438,8 @@ export const FALLBACK_DISTRIBUTORS = [
     address: 'Ruta 9 Km 1304, Los Pocitos, Tucumán',
     phone: '+54 381 437-2290',
     email: 'noa@nortegenetico.com.ar',
+    lat: -26.799,
+    lng: -65.205,
     crops: ['Maíz', 'Soja'],
   },
 ];

@@ -31,21 +31,26 @@ lgsemillas.com/
 
 ## Funcionalidades Principales del Rediseño
 
-1. **Catálogo Genético Interactivo (`client/src/components/ProductCatalog.jsx`)**:
+1. **Estética Oficial LG Semillas + UI 2026 (`Navbar.jsx`, `Hero.jsx`, `AboutSection.jsx`, `ProductCatalog.jsx`)**:
+   - Encabezado bicolor con bloque rojo `#E3002C` y logo oficial **"LG 60 años"**, tipografía `Microbrew-Soft-Four` (`@font-face` local), carrusel Hero de 3 escenas con Canvas 2D interactivo, sección split 50/50 de **Limagrain Argentina** (`oficina.jpg`), damero de 5 cultivos y banner **Productos 2026**.
+2. **Catálogo Genético Interactivo (`client/src/components/ProductCatalog.jsx`)**:
    - Cobertura de las 5 líneas de LG Semillas en Argentina: **Maíz Grano**, **Maíz Silo**, **Girasol**, **Trigo ("La Tropilla del Rinde")** y **Soja**.
-   - Filtros combinados por cultivo, búsqueda de texto, tecnología biotecnológica (`VIP3`, `VT3P`, `RR2`, `CL`, `HO`, `STS`, `Convencional`) y región agroecológica.
+   - Filtros combinados por cultivo (desde botones circulares o pestañas), búsqueda de texto, tecnología biotecnológica (`VIP3`, `VT3P`, `RR2`, `CL`, `HO`, `STS`, `Convencional`) y región agroecológica.
    - Modal de **Ficha Técnica Completa** con perfil sanitario (`Roya`, `Tizón`, `MRC`, `Spiroplasma`), densidades recomendadas para siembra temprana y tardía, y solicitud directa de cotización.
    - **Comparador Técnico** de hasta 3 semillas en paralelo.
-2. **Recomendador Agronómico "Agro Point" (`AgroAdvisor.jsx` + `POST /api/recommend`)**:
+3. **Recomendador Agronómico "Agro Point" (`AgroAdvisor.jsx` + `POST /api/recommend`)**:
    - Recomienda los mejores híbridos o variedades según cultivo, región, fecha de siembra y objetivo del productor, calculando la densidad sugerida y bolsas estimadas para la superficie ingresada.
-3. **Buscador de Red Líder LG (`RedLiderMap.jsx` + `GET /api/distributors`)**:
-   - Localización por provincia y ciudad de distribuidores oficiales en Buenos Aires, Santa Fe, Córdoba, Entre Ríos, La Pampa, Tucumán y Chaco.
-4. **Ensayos y Buenas Prácticas Agrícolas (`NewsSection.jsx` + `GET /api/articles`)**:
-   - Informes técnicos sobre complejo de achaparramiento (*Dalbulus maidis* / *Spiroplasma*), calidad de silaje (*stay-green* y FDND), estrategia de ciclos en trigo y Programa MRI (10% refugio).
-5. **Contacto, Trabajá con Nosotros y Canal Ético (`ContactSection.jsx`)**:
-   - Formularios validados en el backend (`POST /api/contact`, `POST /api/careers`), enlace directo a WhatsApp comercial, sede central en Pergamino (Ruta 32 Km. 2) y acceso al Código de Conducta / Canal de Denuncias Éticas.
-6. **Responsividad Mobile-First**:
-   - Menú *drawer* móvil accesible, pestañas de cultivos con desplazamiento horizontal táctil, controles de al menos 42–48 px de altura y diseño adaptable desde 320 px hasta escritorio amplio.
+4. **Buscador y Mapa Geolocalizado Red Líder LG (`RedLiderMap.jsx` + `GET /api/distributors`)**:
+   - Mapa SVG interactivo geolocalizado con los **57 distribuidores oficiales** en Argentina y Uruguay, filtro por provincia/búsqueda, enlace directo al portal **LG Líder** y prellenado de consulta comercial.
+5. **Videos, Ensayos y Buenas Prácticas (`NewsSection.jsx` + `GET /api/articles`)**:
+   - Grilla oficial de videos institucionales de YouTube (carga bajo demanda para máximo rendimiento) e informes técnicos sobre complejo de achaparramiento (*Dalbulus maidis* / *Spiroplasma*), calidad de silaje (*stay-green* y FDND), estrategia de ciclos en trigo y Programa MRI (10% refugio).
+6. **Contáctenos Duotono, Trabajá con Nosotros y Canal Ético (`ContactSection.jsx`)**:
+   - Sección full-bleed duotono rojo (`form.jpg`), formularios validados en el backend (`POST /api/contact`, `POST /api/careers`), enlace directo a WhatsApp comercial, sede central en Pergamino (Ruta 32 Km. 2), acceso al Código de Conducta / Canal Ético y footer blanco institucional oficial.
+7. **Motion Design (`GSAP` + `genjutsu:cast`), Chatbot WhatsApp (`WhatsAppChatbot.jsx`) y Mobile-First**:
+   - Paleta oficial de `lgsemillas.com` (`#E3002C`, `#a20513`, `#100f26`, `#6f6f6e`, `#f3f3f3`) con logos, favicons, íconos y fotografías reales en `client/public/assets/`.
+   - Tarjetas 3D con spotlight radial y animaciones GSAP (`useGSAP` + `ScrollTrigger`) con respeto estricto a `prefers-reduced-motion`.
+   - Chatbot flotante **AgroBot LG** con atajos y envío directo mediante `VITE_WHATSAPP_SHORTLINK`.
+   - Menú *drawer* móvil accesible, botones ≥ 42–48 px y cero desborde horizontal.
 
 ---
 
@@ -55,7 +60,7 @@ Nunca versiones archivos `.env` reales (están excluidos en `.gitignore`). Utili
 
 | Ámbito | Archivo Plantilla | Propósito y Seguridad |
 | :--- | :--- | :--- |
-| **Frontend** | `client/.env.template` | Solo parámetros públicos con prefijo `VITE_` (`VITE_API_BASE_URL`, `VITE_DEV_PROXY_TARGET`, `VITE_DEV_PORT`, `VITE_SITE_NAME`, `VITE_PUBLIC_CONTACT_EMAIL`, `VITE_PUBLIC_PHONE`, `VITE_PUBLIC_WHATSAPP`, `VITE_PUBLIC_HQ_ADDRESS`, `VITE_ETHICS_URL`, `VITE_DEFAULT_REGION`). **No almacena ni expone credenciales privadas.** |
+| **Frontend** | `client/.env.template` | Solo parámetros públicos con prefijo `VITE_` (`VITE_API_BASE_URL`, `VITE_DEV_PROXY_TARGET`, `VITE_DEV_PORT`, `VITE_SITE_NAME`, `VITE_PUBLIC_CONTACT_EMAIL`, `VITE_PUBLIC_PHONE`, `VITE_PUBLIC_WHATSAPP`, `VITE_WHATSAPP_SHORTLINK`, `VITE_PUBLIC_HQ_ADDRESS`, `VITE_ETHICS_URL`, `VITE_DEFAULT_REGION`). **No almacena ni expone credenciales privadas.** |
 | **Backend** | `server/.env.template` | Configura puerto (`4580`), CORS, rate limiting (`helmet` + `express-rate-limit`), datos institucionales y credenciales privadas exclusivas del servidor (`SMTP_*`, `CRM_API_KEY`, `CRM_WEBHOOK_SECRET`), que nunca se serializan en respuestas HTTP. |
 | **Raíz (Docker)** | `.env.template` | Parametriza puertos (`CLIENT_DOCKER_PORT=8580`, `SERVER_DOCKER_PORT=4580`) y argumentos de build de `docker-compose.yml`. |
 
@@ -103,6 +108,17 @@ El archivo `netlify.toml` en la raíz deja configurado el build y la API serverl
 1. Conecta el repositorio en Netlify (o ejecuta `netlify deploy --prod` con Netlify CLI).
 2. Netlify ejecutará `cd client && npm install && npm run build`, publicará `client/dist` y desplegará `netlify/functions/api.mjs` para atender todas las rutas `/api/*`.
 3. En el panel de Netlify (**Site configuration → Environment variables**), configurá tus variables de entorno según `client/.env.template` y `server/.env.template`.
+
+### 4. Pruebas Funcionales y Auditoría Visual (Playwright)
+
+Con ambos servidores corriendo (`server` en `4580` y `client` en `5580`), ejecuta la suite E2E:
+
+```bash
+cd client
+npm run test:e2e
+```
+
+Valida contraste de header/logo, carrusel Hero con Canvas, Bento showcase y filtros del catálogo, Ficha Técnica, Comparador, Recomendador Agro Point, Red Líder LG, Chatbot AgroBot LG y responsividad mobile sin desborde horizontal.
 
 ---
 

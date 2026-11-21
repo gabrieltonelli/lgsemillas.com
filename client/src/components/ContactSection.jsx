@@ -103,346 +103,342 @@ export default function ContactSection({ prefilledInquiry, careersAreas = [] }) 
     }
   };
 
-  const whatsappUrl = `https://wa.me/${clientEnv.whatsapp}?text=${encodeURIComponent(
-    'Hola LG Semillas, quisiera asesoramiento técnico sobre su catálogo de semillas.'
-  )}`;
-
   return (
-    <section id="contacto" className="py-14 sm:py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
-          {/* Información institucional */}
-          <div className="lg:col-span-5 space-y-6">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-lg-green">
-                Atención Directa · Pergamino, Argentina
-              </span>
-              <h2 className="font-display font-extrabold text-2xl sm:text-4xl text-slate-900 mt-1.5 tracking-tight">
-                Conectá con el equipo de LG Semillas
-              </h2>
-              <p className="text-slate-600 mt-2 text-sm sm:text-base">
-                Realizá consultas comerciales o agronómicas, sumate a nuestro equipo en Pergamino y las regiones productivas, o accedé a nuestros canales de ética y cumplimiento.
-              </p>
-            </div>
+    <section
+      id="contacto"
+      className="relative py-16 sm:py-24 bg-brand-red text-white overflow-hidden"
+    >
+      {/* Fondo duotono rojo exacto del sitio oficial sobre form.jpg */}
+      <img
+        src="/assets/hero/form.jpg"
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover opacity-35 grayscale contrast-125 mix-blend-multiply pointer-events-none"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-gradient-to-br from-brand-darkred/80 via-brand-red/75 to-brand-crimson/85 pointer-events-none"
+      />
 
-            <div className="rounded-3xl bg-stone-50 border border-stone-200 p-5 sm:p-6 space-y-4">
-              <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-lg-forest shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-xs font-bold uppercase text-slate-400">Casa Central & Planta</p>
-                  <p className="text-sm font-semibold text-slate-900">{clientEnv.hqAddress}</p>
-                </div>
-              </div>
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Encabezado centrado oficial */}
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+          <h2 className="font-display font-extrabold text-3xl sm:text-5xl text-white tracking-tight">
+            Contáctenos
+          </h2>
+          <p className="text-white/90 text-sm sm:text-base mt-3">
+            Consultá por disponibilidad de híbridos y variedades, asesoramiento técnico en tu lote o sumate a nuestro equipo en Limagrain Argentina.
+          </p>
 
-              <div className="flex items-start gap-3">
-                <Mail className="w-5 h-5 text-lg-forest shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-xs font-bold uppercase text-slate-400">Correo Institucional</p>
-                  <a
-                    href={`mailto:${clientEnv.contactEmail}`}
-                    className="text-sm font-semibold text-lg-forest hover:underline"
-                  >
-                    {clientEnv.contactEmail}
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Phone className="w-5 h-5 text-lg-forest shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-xs font-bold uppercase text-slate-400">Teléfono de Contacto</p>
-                  <a
-                    href={`tel:${clientEnv.phone}`}
-                    className="text-sm font-semibold text-slate-900 hover:underline"
-                  >
-                    {clientEnv.phone}
-                  </a>
-                </div>
-              </div>
-
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full min-h-[46px] inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm transition-colors"
-              >
-                <MessageCircle className="w-4 h-4" />
-                <span>Escribir por WhatsApp Comercial</span>
-              </a>
-            </div>
-
-            <div className="rounded-2xl border border-amber-200 bg-amber-50/70 p-4 sm:p-5 flex items-start gap-3">
-              <ShieldCheck className="w-5 h-5 text-amber-800 shrink-0 mt-0.5" />
-              <div className="text-xs sm:text-sm text-amber-950 space-y-1">
-                <p className="font-bold">Código de Conducta y Canal de Denuncias Éticas</p>
-                <p className="text-amber-900/90">
-                  Mantenemos un canal confidencial disponible para colaboradores, productores y proveedores.
-                </p>
-                <a
-                  href={clientEnv.ethicsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block font-bold text-lg-forest hover:underline pt-0.5"
-                >
-                  Acceder al Canal Ético Limagrain →
-                </a>
-              </div>
-            </div>
+          {/* Selector discreto Consultar / Trabajá con Nosotros */}
+          <div className="inline-flex items-center gap-1.5 mt-5 p-1.5 rounded-full bg-black/25 backdrop-blur-sm border border-white/20">
+            <button
+              type="button"
+              onClick={() => {
+                setActiveTab('contact');
+                setStatus({ loading: false, error: '', success: '' });
+              }}
+              className={`min-h-[40px] px-5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all ${
+                activeTab === 'contact'
+                  ? 'bg-white text-brand-red shadow-sm'
+                  : 'text-white/90 hover:text-white'
+              }`}
+            >
+              Consulta Comercial
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setActiveTab('careers');
+                setStatus({ loading: false, error: '', success: '' });
+              }}
+              className={`min-h-[40px] px-5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider inline-flex items-center gap-1.5 transition-all ${
+                activeTab === 'careers'
+                  ? 'bg-white text-brand-red shadow-sm'
+                  : 'text-white/90 hover:text-white'
+              }`}
+            >
+              <Briefcase className="w-3.5 h-3.5" />
+              Trabajá con Nosotros
+            </button>
           </div>
+        </div>
 
-          {/* Panel de formularios */}
-          <div className="lg:col-span-7 bg-stone-50 rounded-3xl border border-stone-200 p-5 sm:p-8 shadow-sm">
-            {/* Tabs */}
-            <div className="grid grid-cols-2 gap-2 bg-white p-1.5 rounded-2xl border border-stone-200 mb-6">
-              <button
-                type="button"
-                onClick={() => {
-                  setActiveTab('contact');
-                  setStatus({ loading: false, error: '', success: '' });
-                }}
-                className={`min-h-[44px] inline-flex items-center justify-center gap-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${
-                  activeTab === 'contact'
-                    ? 'bg-lg-forest text-white shadow-sm'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                <Send className="w-4 h-4" />
-                <span>Consulta Técnica</span>
-              </button>
+        {/* Estado de envío */}
+        {status.error && (
+          <div
+            role="alert"
+            className="mb-6 rounded-2xl bg-white text-brand-darkred px-4 py-3 text-sm font-semibold flex items-center gap-2.5 shadow-lg max-w-4xl mx-auto"
+          >
+            <AlertCircle className="w-5 h-5 shrink-0" />
+            <span>{status.error}</span>
+          </div>
+        )}
+        {status.success && (
+          <div
+            role="status"
+            className="mb-6 rounded-2xl bg-white text-emerald-800 px-4 py-3 text-sm font-semibold flex items-center gap-2.5 shadow-lg max-w-4xl mx-auto"
+          >
+            <CheckCircle2 className="w-5 h-5 shrink-0 text-emerald-600" />
+            <span>{status.success}</span>
+          </div>
+        )}
 
-              <button
-                type="button"
-                onClick={() => {
-                  setActiveTab('careers');
-                  setStatus({ loading: false, error: '', success: '' });
-                }}
-                className={`min-h-[44px] inline-flex items-center justify-center gap-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${
-                  activeTab === 'careers'
-                    ? 'bg-lg-forest text-white shadow-sm'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                <Briefcase className="w-4 h-4" />
-                <span>Trabajá con Nosotros</span>
-              </button>
-            </div>
-
-            {status.success && (
-              <div className="mb-5 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-sm flex items-start gap-2.5">
-                <CheckCircle2 className="w-5 h-5 text-emerald-700 shrink-0 mt-0.5" />
-                <span>{status.success}</span>
-              </div>
-            )}
-
-            {status.error && (
-              <div className="mb-5 p-4 rounded-2xl bg-red-50 border border-red-200 text-red-900 text-sm flex items-start gap-2.5">
-                <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
-                <span>{status.error}</span>
-              </div>
-            )}
-
-            {activeTab === 'contact' ? (
-              <form onSubmit={handleContactSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">
-                      Nombre y Apellido *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={contactForm.name}
-                      onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
-                      placeholder="Ej. Juan Pérez"
-                      className="w-full min-h-[44px] px-3.5 py-2 rounded-xl bg-white border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-lg-green/40"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">
-                      Correo electrónico *
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      value={contactForm.email}
-                      onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
-                      placeholder="productor@campo.com.ar"
-                      className="w-full min-h-[44px] px-3.5 py-2 rounded-xl bg-white border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-lg-green/40"
-                    />
-                  </div>
+        {/* Formularios fieles al layout de 2 columnas del screenshot */}
+        {activeTab === 'contact' ? (
+          <form onSubmit={handleContactSubmit} className="max-w-4xl mx-auto space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+              {/* Columna izquierda: 3 campos blancos apilados + cultivo/teléfono */}
+              <div className="space-y-3.5">
+                <div>
+                  <label htmlFor="contact-name" className="sr-only">
+                    Nombre y Apellido
+                  </label>
+                  <input
+                    id="contact-name"
+                    type="text"
+                    required
+                    minLength={2}
+                    placeholder="Nombre"
+                    value={contactForm.name}
+                    onChange={(e) => setContactForm((p) => ({ ...p, name: e.target.value }))}
+                    className="w-full min-h-[48px] px-4 py-3 rounded-xl bg-white text-brand-navy placeholder:text-brand-gray text-sm font-medium shadow-md focus:outline-none focus:ring-2 focus:ring-white"
+                  />
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                  <label htmlFor="contact-email" className="sr-only">
+                    Email
+                  </label>
+                  <input
+                    id="contact-email"
+                    type="email"
+                    required
+                    placeholder="Email"
+                    value={contactForm.email}
+                    onChange={(e) => setContactForm((p) => ({ ...p, email: e.target.value }))}
+                    className="w-full min-h-[48px] px-4 py-3 rounded-xl bg-white text-brand-navy placeholder:text-brand-gray text-sm font-medium shadow-md focus:outline-none focus:ring-2 focus:ring-white"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="contact-province" className="sr-only">
+                    Empresa o Localidad / Provincia
+                  </label>
+                  <input
+                    id="contact-province"
+                    type="text"
+                    required
+                    minLength={2}
+                    placeholder="Empresa / Localidad y Provincia"
+                    value={contactForm.province}
+                    onChange={(e) => setContactForm((p) => ({ ...p, province: e.target.value }))}
+                    className="w-full min-h-[48px] px-4 py-3 rounded-xl bg-white text-brand-navy placeholder:text-brand-gray text-sm font-medium shadow-md focus:outline-none focus:ring-2 focus:ring-white"
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">
-                      Teléfono / WhatsApp
+                    <label htmlFor="contact-phone" className="sr-only">
+                      Teléfono (opcional)
                     </label>
                     <input
+                      id="contact-phone"
                       type="tel"
+                      placeholder="Teléfono (opcional)"
                       value={contactForm.phone}
-                      onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })}
-                      placeholder="+54 9 ..."
-                      className="w-full min-h-[44px] px-3.5 py-2 rounded-xl bg-white border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-lg-green/40"
+                      onChange={(e) => setContactForm((p) => ({ ...p, phone: e.target.value }))}
+                      className="w-full min-h-[44px] px-4 py-2.5 rounded-xl bg-white/95 text-brand-navy placeholder:text-brand-gray text-xs font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-white"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">
-                      Provincia / Localidad *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={contactForm.province}
-                      onChange={(e) =>
-                        setContactForm({ ...contactForm, province: e.target.value })
-                      }
-                      placeholder="Ej. Pergamino, Bs. As."
-                      className="w-full min-h-[44px] px-3.5 py-2 rounded-xl bg-white border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-lg-green/40"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                    <label htmlFor="contact-crop" className="sr-only">
                       Cultivo de interés
                     </label>
                     <select
+                      id="contact-crop"
                       value={contactForm.cropInterest}
                       onChange={(e) =>
-                        setContactForm({ ...contactForm, cropInterest: e.target.value })
+                        setContactForm((p) => ({ ...p, cropInterest: e.target.value }))
                       }
-                      className="w-full min-h-[44px] px-3 py-2 rounded-xl bg-white border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-lg-green/40"
+                      className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl bg-white/95 text-brand-navy text-xs font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-white"
                     >
-                      <option>Maíz Grano</option>
-                      <option>Maíz Silo</option>
-                      <option>Girasol</option>
-                      <option>Trigo</option>
-                      <option>Soja</option>
-                      <option>Red Líder LG</option>
+                      <option value="Maíz Grano">Maíz Grano</option>
+                      <option value="Maíz Silo">Maíz Silo</option>
+                      <option value="Girasol">Girasol</option>
+                      <option value="Trigo">Trigo</option>
+                      <option value="Soja">Soja</option>
+                      <option value="Red Líder LG">Red Líder LG</option>
                     </select>
                   </div>
                 </div>
+              </div>
 
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
-                    Consulta / Detalle del lote *
-                  </label>
-                  <textarea
-                    rows="4"
-                    required
-                    value={contactForm.message}
-                    onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
-                    placeholder="Indicá híbrido o variedad de interés, hectáreas estimadas o consulta agronómica..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-lg-green/40"
-                  />
-                </div>
+              {/* Columna derecha: Textarea blanca alta */}
+              <div className="flex flex-col">
+                <label htmlFor="contact-message" className="sr-only">
+                  Comentario
+                </label>
+                <textarea
+                  id="contact-message"
+                  required
+                  minLength={8}
+                  placeholder="Comentario (cultivo, localidad o consulta técnica)..."
+                  value={contactForm.message}
+                  onChange={(e) => setContactForm((p) => ({ ...p, message: e.target.value }))}
+                  className="w-full flex-1 min-h-[180px] px-4 py-3.5 rounded-xl bg-white text-brand-navy placeholder:text-brand-gray text-sm font-medium shadow-md resize-none focus:outline-none focus:ring-2 focus:ring-white"
+                />
+              </div>
+            </div>
 
-                <button
-                  type="submit"
-                  disabled={status.loading}
-                  className="w-full min-h-[48px] inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-lg-forest hover:bg-lg-green disabled:opacity-60 text-white font-bold text-sm transition-colors"
+            <div className="text-center pt-1">
+              <button
+                type="submit"
+                disabled={status.loading}
+                className="cast-btn-press inline-flex items-center justify-center gap-2 min-h-[50px] px-12 rounded-xl bg-brand-rose hover:bg-white text-white hover:text-brand-red font-extrabold text-sm uppercase tracking-[0.18em] shadow-xl disabled:opacity-60 transition-colors"
+              >
+                {status.loading ? 'ENVIANDO...' : 'ENVIAR'}
+                <Send className="w-4 h-4" />
+              </button>
+            </div>
+          </form>
+        ) : (
+          <form onSubmit={handleCareerSubmit} className="max-w-4xl mx-auto space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+              <div className="space-y-3.5">
+                <input
+                  type="text"
+                  required
+                  minLength={2}
+                  placeholder="Nombre y Apellido"
+                  value={careerForm.name}
+                  onChange={(e) => setCareerForm((p) => ({ ...p, name: e.target.value }))}
+                  className="w-full min-h-[48px] px-4 py-3 rounded-xl bg-white text-brand-navy placeholder:text-brand-gray text-sm font-medium shadow-md focus:outline-none"
+                />
+                <input
+                  type="email"
+                  required
+                  placeholder="Email de contacto"
+                  value={careerForm.email}
+                  onChange={(e) => setCareerForm((p) => ({ ...p, email: e.target.value }))}
+                  className="w-full min-h-[48px] px-4 py-3 rounded-xl bg-white text-brand-navy placeholder:text-brand-gray text-sm font-medium shadow-md focus:outline-none"
+                />
+                <select
+                  value={careerForm.area}
+                  onChange={(e) => setCareerForm((p) => ({ ...p, area: e.target.value }))}
+                  aria-label="Área de interés laboral"
+                  className="w-full min-h-[48px] px-4 py-3 rounded-xl bg-white text-brand-navy text-sm font-semibold shadow-md focus:outline-none"
                 >
-                  <Send className="w-4 h-4" />
-                  <span>{status.loading ? 'Enviando consulta...' : 'Enviar Consulta a LG Semillas'}</span>
-                </button>
-              </form>
-            ) : (
-              <form onSubmit={handleCareerSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">
-                      Nombre completo *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={careerForm.name}
-                      onChange={(e) => setCareerForm({ ...careerForm, name: e.target.value })}
-                      placeholder="Tu nombre y apellido"
-                      className="w-full min-h-[44px] px-3.5 py-2 rounded-xl bg-white border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-lg-green/40"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">
-                      Correo electrónico *
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      value={careerForm.email}
-                      onChange={(e) => setCareerForm({ ...careerForm, email: e.target.value })}
-                      placeholder="tu@email.com"
-                      className="w-full min-h-[44px] px-3.5 py-2 rounded-xl bg-white border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-lg-green/40"
-                    />
-                  </div>
-                </div>
+                  {(careersAreas.length
+                    ? careersAreas
+                    : [
+                        'Desarrollo Técnico y Ensayos a Campo',
+                        'Comercial y Red Líder',
+                        'Investigación y Mejoramiento (I+D)',
+                        'Producción de Semillas y Planta Pergamino',
+                        'Administración y Finanzas',
+                      ]
+                  ).map((area) => (
+                    <option key={area} value={area}>
+                      {area}
+                    </option>
+                  ))}
+                </select>
+                <input
+                  type="url"
+                  placeholder="Perfil de LinkedIn (opcional)"
+                  value={careerForm.linkedin}
+                  onChange={(e) => setCareerForm((p) => ({ ...p, linkedin: e.target.value }))}
+                  className="w-full min-h-[44px] px-4 py-2.5 rounded-xl bg-white/95 text-brand-navy placeholder:text-brand-gray text-xs font-medium shadow-sm focus:outline-none"
+                />
+              </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">
-                      Área de interés *
-                    </label>
-                    <select
-                      value={careerForm.area}
-                      onChange={(e) => setCareerForm({ ...careerForm, area: e.target.value })}
-                      className="w-full min-h-[44px] px-3 py-2 rounded-xl bg-white border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-lg-green/40"
-                    >
-                      {(careersAreas.length
-                        ? careersAreas
-                        : [
-                            'Investigación y Mejoramiento Genético (I+D)',
-                            'Desarrollo Técnico y Ensayos a Campo',
-                            'Producción de Semillas y Planta Pergamino',
-                            'Comercial y Red Líder LG',
-                            'Administración, Finanzas y Supply Chain',
-                          ]
-                      ).map((area) => (
-                        <option key={area} value={area}>
-                          {area}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">
-                      Perfil LinkedIn o Portfolio
-                    </label>
-                    <input
-                      type="url"
-                      value={careerForm.linkedin}
-                      onChange={(e) => setCareerForm({ ...careerForm, linkedin: e.target.value })}
-                      placeholder="https://linkedin.com/in/..."
-                      className="w-full min-h-[44px] px-3.5 py-2 rounded-xl bg-white border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-lg-green/40"
-                    />
-                  </div>
-                </div>
+              <div className="flex flex-col">
+                <textarea
+                  required
+                  minLength={8}
+                  placeholder="Contanos brevemente tu experiencia profesional, formación académica o ciudad de residencia..."
+                  value={careerForm.message}
+                  onChange={(e) => setCareerForm((p) => ({ ...p, message: e.target.value }))}
+                  className="w-full flex-1 min-h-[180px] px-4 py-3.5 rounded-xl bg-white text-brand-navy placeholder:text-brand-gray text-sm font-medium shadow-md resize-none focus:outline-none"
+                />
+              </div>
+            </div>
 
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
-                    Presentación y experiencia *
-                  </label>
-                  <textarea
-                    rows="4"
-                    required
-                    value={careerForm.message}
-                    onChange={(e) => setCareerForm({ ...careerForm, message: e.target.value })}
-                    placeholder="Contanos tu formación agronómica o técnica, residencia y motivación para sumarte a Limagrain Argentina..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-lg-green/40"
-                  />
-                </div>
+            <div className="text-center pt-1">
+              <button
+                type="submit"
+                disabled={status.loading}
+                className="cast-btn-press inline-flex items-center justify-center gap-2 min-h-[50px] px-12 rounded-xl bg-brand-rose hover:bg-white text-white hover:text-brand-red font-extrabold text-sm uppercase tracking-[0.18em] shadow-xl disabled:opacity-60 transition-colors"
+              >
+                {status.loading ? 'ENVIANDO POSTULACIÓN...' : 'POSTULARME'}
+                <Send className="w-4 h-4" />
+              </button>
+            </div>
+          </form>
+        )}
 
-                <button
-                  type="submit"
-                  disabled={status.loading}
-                  className="w-full min-h-[48px] inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-lg-forest hover:bg-lg-green disabled:opacity-60 text-white font-bold text-sm transition-colors"
-                >
-                  <Briefcase className="w-4 h-4" />
-                  <span>{status.loading ? 'Enviando postulación...' : 'Enviar Postulación'}</span>
-                </button>
-              </form>
-            )}
+        {/* Información institucional y canales directos en pie del bloque rojo */}
+        <div className="mt-12 pt-8 border-t border-white/25 grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
+          <div className="rounded-2xl bg-black/20 backdrop-blur-sm border border-white/15 p-4 flex items-start gap-3">
+            <MapPin className="w-5 h-5 text-white shrink-0 mt-0.5" />
+            <div>
+              <p className="font-bold text-white uppercase tracking-wider text-[11px]">
+                Planta &amp; Sede Pergamino
+              </p>
+              <p className="text-white/90 mt-1">{clientEnv.hqAddress}</p>
+              <p className="text-white/80 mt-0.5 flex items-center gap-1.5">
+                <Phone className="w-3.5 h-3.5" />
+                {clientEnv.phone}
+              </p>
+            </div>
+          </div>
+
+          <div className="rounded-2xl bg-black/20 backdrop-blur-sm border border-white/15 p-4 flex items-start gap-3">
+            <MessageCircle className="w-5 h-5 text-white shrink-0 mt-0.5" />
+            <div>
+              <p className="font-bold text-white uppercase tracking-wider text-[11px]">
+                Atención Directa &amp; WhatsApp
+              </p>
+              <a
+                href={`mailto:${clientEnv.contactEmail}`}
+                className="text-white hover:underline block mt-1 font-medium"
+              >
+                <Mail className="w-3.5 h-3.5 inline mr-1.5" />
+                {clientEnv.contactEmail}
+              </a>
+              <a
+                href={clientEnv.whatsappShortlink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 mt-1.5 text-xs font-bold bg-white text-brand-red px-3 py-1 rounded-full hover:bg-brand-cream transition-colors"
+              >
+                Chat oficial WhatsApp ↗
+              </a>
+            </div>
+          </div>
+
+          <div className="rounded-2xl bg-black/20 backdrop-blur-sm border border-white/15 p-4 flex items-start gap-3">
+            <ShieldCheck className="w-5 h-5 text-white shrink-0 mt-0.5" />
+            <div>
+              <p className="font-bold text-white uppercase tracking-wider text-[11px]">
+                Gobernanza &amp; Ética Limagrain
+              </p>
+              <p className="text-white/85 text-xs mt-1">
+                Compromiso internacional con la transparencia, ética comercial y trazabilidad.
+              </p>
+              <a
+                href={clientEnv.ethicsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block mt-1.5 text-xs font-bold text-white underline hover:text-brand-cream"
+              >
+                Canal de Denuncias / Whistleblowing ↗
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
 }
-

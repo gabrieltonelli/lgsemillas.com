@@ -1,0 +1,6 @@
+$(document).on('click', '.switch', function() {
+    $('html').removeClass('mobile-nav-activated');
+    $('html').removeClass('overflow-hidden');
+    $('#main-header-collapse-clone').toggleClass('show');
+    $('.navbar-toggle').addClass('collapsed');
+});

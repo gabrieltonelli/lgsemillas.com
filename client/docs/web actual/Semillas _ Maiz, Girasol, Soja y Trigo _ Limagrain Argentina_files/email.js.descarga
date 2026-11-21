@@ -1,0 +1,56 @@
+function processContactForm(action, method, data) {
+    $.ajax({
+        url: action,
+        type: method,
+        data: data,
+        dataType: 'json',
+        cache: false,
+        contentType: false,
+        processData: false,
+        beforeSend: function() {
+            $('#send-contact-button').prop('disabled', true);
+            $('#send-contact-button').val('PROCESANDO...');
+        },
+        success: function(response) {
+            if (response.success) {
+                swal({
+                    title: 'Mensaje', 
+                    text: response.message, 
+                    type: 'success'
+                }).then(function() {
+                    window.location.href = '/';
+                });
+            } else {
+                swal({
+                    title: 'Error', 
+                    text: response.message, 
+                    type: 'error'
+                });
+            }
+
+            $('#send-contact-button').prop('disabled', false);
+            $('#send-contact-button').val('ENVIAR');
+        },
+        error: function(xhr) {
+
+            swal({
+                title: 'Ups', 
+                text: xhr.responseText, 
+                type: 'warning'
+            });
+            
+            $('#send-contact-button').prop('disabled', false);
+            $('#send-contact-button').val('ENVIAR');
+        }
+    });
+}
+
+$(document).on('submit', '#send-contact-form', function(event) {
+    event.preventDefault();
+
+    var action = $(this).attr('action'),
+    method = $(this).attr('method'),
+    data = new FormData(this);
+
+    processContactForm(action, method, data);
+});

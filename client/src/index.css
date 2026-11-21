@@ -2,6 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Conv_Microbrew-Soft-Four';
+  src: url('/assets/fonts/Microbrew-Soft-Four.woff') format('woff'),
+    url('/assets/fonts/Microbrew-Soft-Four.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --lg-red: #E3002C;
+  --lg-crimson: #d51936;
+  --lg-darkred: #a20513;
+  --lg-navy: #100f26;
+  --lg-slate: #181b31;
+  --lg-gray: #6f6f6e;
+  --lg-lightgray: #f3f3f3;
+  --lg-coral: #ff7a4b;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-md3: cubic-bezier(0.2, 0, 0, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
 @layer base {
   html {
     scroll-padding-top: 5.5rem;
@@ -10,11 +33,13 @@
 
   body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--lg-navy);
+    background-color: #fbfaf7;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4 {
-    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Archivo Narrow', 'Inter', system-ui, sans-serif;
   }
 }
 
@@ -28,3 +53,180 @@
   }
 }
 
+/* ================= GENJUTSU 2026 + MOTION DESIGN ================= */
+
+@keyframes castFadeUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0) scale(0.985);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes castBarFill {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes castModalPop {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes botBreath {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -4px, 0) scale(1.03);
+  }
+}
+
+@keyframes heroSlideProgress {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes kenBurns {
+  0% {
+    transform: scale(1.03) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.11) translate3d(-1.5%, -1%, 0);
+  }
+}
+
+.hero-scene-zoom {
+  animation: kenBurns 9s ease-out forwards;
+}
+
+.hero-progress-bar {
+  transform-origin: left center;
+  animation: heroSlideProgress 6s linear infinite;
+}
+
+/* Spotlight 3D interactivo guiado por --mx / --my */
+.spotlight-card {
+  position: relative;
+  transform-style: preserve-3d;
+  transition:
+    transform 240ms var(--ease-md3),
+    box-shadow 260ms var(--ease-md3),
+    border-color 220ms var(--ease-md3);
+  will-change: transform;
+}
+
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 250ms ease;
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 30%),
+    rgba(227, 0, 44, 0.12),
+    transparent 60%
+  );
+  z-index: 1;
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+.spotlight-card:hover {
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))
+    translate3d(0, -6px, 0);
+}
+
+.spotlight-card:active {
+  transform: scale(0.985);
+  transition-duration: 110ms;
+}
+
+.cast-card {
+  transition:
+    transform 220ms var(--ease-md3),
+    box-shadow 220ms var(--ease-md3),
+    border-color 220ms var(--ease-md3);
+  will-change: transform;
+}
+
+.cast-card:hover {
+  transform: translate3d(0, -5px, 0);
+}
+
+.cast-card:active {
+  transform: scale(0.985);
+  transition-duration: 110ms;
+}
+
+.cast-score-bar {
+  transform-origin: left center;
+  animation: castBarFill 700ms var(--ease-out-expo) both;
+}
+
+.cast-modal-enter {
+  animation: castModalPop 280ms var(--ease-out-expo) both;
+}
+
+.cast-btn-arrow svg.arrow-icon {
+  transition: transform 180ms var(--ease-spring);
+}
+
+.cast-btn-arrow:hover svg.arrow-icon {
+  transform: translate3d(4px, 0, 0);
+}
+
+.cast-btn-press {
+  transition:
+    transform 130ms var(--ease-md3),
+    background-color 180ms var(--ease-md3),
+    border-color 180ms var(--ease-md3),
+    box-shadow 180ms var(--ease-md3);
+}
+
+.cast-btn-press:active {
+  transform: scale(0.97);
+}
+
+.cast-bot-float {
+  animation: botBreath 3.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-scene-zoom,
+  .hero-progress-bar,
+  .cast-score-bar,
+  .cast-modal-enter,
+  .cast-bot-float {
+    animation: none !important;
+  }
+
+  .spotlight-card:hover,
+  .cast-card:hover,
+  .cast-card:active,
+  .cast-btn-press:active,
+  .cast-btn-arrow:hover svg.arrow-icon {
+    transform: none !important;
+  }
+}
