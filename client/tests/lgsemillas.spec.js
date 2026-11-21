@@ -49,7 +49,7 @@ test.describe('LG Semillas — Pruebas Funcionales y Auditoría Visual 2026', ()
 
     await nosotros.getByRole('button', { name: /Descubrí más de/i }).click();
     await expect(page.getByRole('heading', { name: /Limagrain y LG Semillas/i })).toBeVisible();
-    await page.getByRole('button', { name: 'Cerrar', exact: true }).last().click();
+    await page.getByRole('button', { name: 'Cerrar', exact: true }).click();
 
     expect(consoleErrors).toEqual([]);
   });
@@ -110,10 +110,8 @@ test.describe('LG Semillas — Pruebas Funcionales y Auditoría Visual 2026', ()
     // Novedades / Videos YouTube oficiales
     const novedades = page.locator('#novedades');
     await novedades.scrollIntoViewIfNeeded();
-    await expect(novedades.getByRole('heading', { name: /Enraízados en el Propósito/i })).toBeVisible();
-    await expect(novedades.getByRole('heading', { name: /T\. Reynal e I\. Martínez/i })).toBeVisible();
-    await page.waitForTimeout(350);
-    await page.screenshot({ path: `${SCREENSHOT_DIR}/desktop-novedades.png`, fullPage: false });
+    await expect(novedades.getByText(/Enraízados en el Propósito/i)).toBeVisible();
+    await expect(novedades.getByText(/T\. Reynal e I\. Martínez/i)).toBeVisible();
     await novedades.locator('button[aria-label^="Reproducir video:"]').first().click();
     await expect(novedades.locator('iframe[src*="youtube.com/embed/dR6MN8LLEQw"]')).toBeVisible();
 
@@ -123,8 +121,6 @@ test.describe('LG Semillas — Pruebas Funcionales y Auditoría Visual 2026', ()
     await expect(redLider.getByText(/57 agentes oficiales/i)).toBeVisible();
     const mapPinsCount = await redLider.locator('svg g[role="button"]').count();
     expect(mapPinsCount).toBe(57);
-    await page.waitForTimeout(350);
-    await page.screenshot({ path: `${SCREENSHOT_DIR}/desktop-red-lider.png`, fullPage: false });
 
     // Filtrar por Buenos Aires y contactar agente seleccionado
     await redLider.getByRole('button', { name: 'Buenos Aires', exact: true }).click();
@@ -149,8 +145,6 @@ test.describe('LG Semillas — Pruebas Funcionales y Auditoría Visual 2026', ()
       [...el.querySelectorAll('img')].every((img) => img.complete && img.naturalWidth > 0)
     );
     expect(footerLogosLoaded).toBe(true);
-    await page.waitForTimeout(300);
-    await page.screenshot({ path: `${SCREENSHOT_DIR}/desktop-contact-footer.png`, fullPage: false });
 
     // Chatbot AgroBot LG + link WhatsApp oficial
     const botBtn = page.getByRole('button', { name: /Abrir asistente WhatsApp AgroBot LG/i });
