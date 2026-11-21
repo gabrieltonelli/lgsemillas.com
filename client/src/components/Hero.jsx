@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { ChevronLeft, ChevronRight, ArrowRight, Search } from 'lucide-react';
 
 gsap.registerPlugin(useGSAP);
 
@@ -15,7 +14,6 @@ const HERO_SLIDES = [
     mobileArtwork: '/assets/hero/juntos.png',
     captionAlt: 'Juntos producimos mejor — LG Semillas',
     badge: 'Campaña 2026 · De Productor a Productor',
-    quickAction: { label: 'Explorar Portfolio 2026', target: 'catalogo' },
   },
   {
     id: 'slide-2',
@@ -26,7 +24,6 @@ const HERO_SLIDES = [
     captionText:
       'De productor a productor, creamos semillas para agricultores en todo el mundo con el fin de ayudarlos a producir más y mejor. Trabajamos con pasión y compromiso para alcanzar cada vez mejores resultados.',
     badge: 'Girasol · Maíz · Trigo · Soja',
-    quickAction: { label: 'Recomendador Agro Point', target: 'recomendador' },
   },
   {
     id: 'slide-3',
@@ -36,21 +33,11 @@ const HERO_SLIDES = [
     overlayArtwork: '/assets/hero/cooperamos-agricultura-2.png',
     captionAlt: 'Cooperamos para el progreso de la agricultura',
     badge: 'Cooperativa Limagrain · 60 años',
-    quickAction: { label: 'Red Líder LG', target: 'red-lider' },
   },
 ];
 
-const QUICK_CROPS = [
-  { id: 'maiz', label: 'Maíz', icon: '/assets/crops/maiz-icon.png' },
-  { id: 'girasol', label: 'Girasol', icon: '/assets/crops/girasol-icon-r.png' },
-  { id: 'trigo', label: 'Trigo', icon: '/assets/crops/trigo-icon-r.png' },
-  { id: 'soja', label: 'Soja', icon: '/assets/crops/soja-icon.png' },
-  { id: 'silo', label: 'Maíz Silo', icon: '/assets/crops/maiz-silo-icon.png' },
-];
-
-export default function Hero({ onQuickSearch, onSelectCrop }) {
+export default function Hero() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [query, setQuery] = useState('');
   const heroRef = useRef(null);
   const canvasRef = useRef(null);
   const pointerRef = useRef({ x: -999, y: -999 });
@@ -139,15 +126,6 @@ export default function Hero({ onQuickSearch, onSelectCrop }) {
     };
   }, []);
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    onQuickSearch?.(query);
-  };
-
-  const handleCropShortcut = (cropId) => {
-    onSelectCrop?.(cropId);
-  };
-
   return (
     <section
       id="inicio"
@@ -191,7 +169,7 @@ export default function Hero({ onQuickSearch, onSelectCrop }) {
 
       {/* Contenido por escena fiel a la captura del sitio oficial */}
       {currentSlide.type === 'juntos' && (
-        <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 flex flex-col justify-between pt-8 pb-28 sm:pb-24">
+        <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 flex flex-col justify-between pt-8 pb-12 sm:pb-14">
           <div className="ml-auto w-full md:w-[58%] lg:w-[54%] pt-4 sm:pt-12 flex flex-col items-center sm:items-end text-center sm:text-right">
             <img
               src={currentSlide.overlayArtwork}
@@ -208,114 +186,63 @@ export default function Hero({ onQuickSearch, onSelectCrop }) {
       )}
 
       {currentSlide.type === 'somoslg' && (
-        <div className="relative h-full w-full flex justify-end">
-          <div className="gsap-slide-content w-full md:w-[50%] lg:w-[46%] h-full bg-brand-red/90 backdrop-blur-xs px-6 sm:px-12 lg:px-16 py-10 flex flex-col justify-center">
-            <p className="text-lg sm:text-2xl lg:text-[1.75rem] font-light leading-snug text-white mb-6">
-              {currentSlide.captionText}
-            </p>
-            <div className="flex justify-end">
-              <img
-                src={currentSlide.overlayArtwork}
-                alt="Somos LG Semillas"
-                className="w-36 sm:w-52 h-auto object-contain"
-              />
-            </div>
-          </div>
-        </div>
+              <div className="relative h-full w-full grid grid-cols-1 lg:grid-cols-2">
+                <div
+                  data-testid="hero-somoslg-box"
+                  className="gsap-slide-content h-full bg-brand-red/90 backdrop-blur-xs px-6 sm:px-12 lg:px-16 xl:px-24 py-10 flex flex-col justify-center"
+                >
+                  <div className="max-w-xl">
+                    <p className="text-lg sm:text-2xl lg:text-[1.75rem] font-light leading-snug text-white mb-6">
+                      {currentSlide.captionText}
+                    </p>
+                    <div className="flex justify-end">
+                      <img
+                        src={currentSlide.overlayArtwork}
+                        alt="Somos LG Semillas"
+                        className="w-36 sm:w-52 h-auto object-contain"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
       )}
 
-      {currentSlide.type === 'cooperamos' && (
-        <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 flex items-center">
-          <div className="gsap-slide-content max-w-lg sm:max-w-xl bg-brand-navy/45 backdrop-blur-sm p-5 sm:p-7 rounded-3xl border border-white/15">
-            <img
-              src={currentSlide.overlayArtwork}
-              alt={currentSlide.captionAlt}
-              className="w-full h-auto drop-shadow-lg"
-            />
-          </div>
-        </div>
-      )}
+              {currentSlide.type === 'cooperamos' && (
+                <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 flex items-center">
+                  <div className="gsap-slide-content max-w-lg sm:max-w-xl">
+                    <img
+                      src={currentSlide.overlayArtwork}
+                      alt={currentSlide.captionAlt}
+                      className="w-full h-auto drop-shadow-lg"
+                    />
+                  </div>
+                </div>
+              )}
 
-      {/* Dock Interactivo Moderno 2026 en el pie del Hero (Buscador + Cultivos + Controles de Slider) */}
-      <div className="absolute inset-x-0 bottom-0 z-20 px-4 sm:px-6 lg:px-10 pb-4">
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 bg-brand-navy/85 backdrop-blur-xl border border-white/15 rounded-2xl p-2.5 sm:p-3 shadow-2xl">
-          {/* Buscador compacto */}
-          <form onSubmit={handleSearch} className="flex items-center gap-2 flex-1 max-w-md">
-            <div className="relative flex-1">
-              <Search className="w-4 h-4 text-brand-gray absolute left-3 top-1/2 -translate-y-1/2" />
-              <input
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Buscar híbrido o variedad (ej. 30680, 5710 CL)..."
-                aria-label="Buscar híbrido o variedad"
-                className="w-full min-h-[40px] pl-9 pr-3 py-1.5 rounded-xl bg-white text-brand-navy text-xs sm:text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-red"
-              />
-            </div>
-            <button
-              type="submit"
-              className="cast-btn-press min-h-[40px] px-4 rounded-xl bg-brand-red hover:bg-brand-darkred text-white text-xs font-extrabold uppercase tracking-wider inline-flex items-center gap-1.5 shrink-0"
-            >
-              <span>Buscar</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
-          </form>
-
-          {/* Accesos rápidos por cultivo */}
-          <div className="flex flex-wrap sm:flex-nowrap items-center justify-center sm:justify-start gap-1.5">
-            {QUICK_CROPS.map((crop) => (
-              <button
-                key={crop.id}
-                type="button"
-                onClick={() => handleCropShortcut(crop.id)}
-                className="cast-btn-press min-h-[36px] sm:min-h-[38px] px-2.5 sm:px-3 py-1 rounded-xl bg-white/10 hover:bg-brand-red text-white text-[11px] sm:text-xs font-bold inline-flex items-center gap-1.5 whitespace-nowrap transition-colors"
+              {/* Indicadores de carrusel (3 puntitos) */}
+              <div
+                className="absolute bottom-5 inset-x-0 z-20 flex items-center justify-center gap-2.5"
+                role="tablist"
+                aria-label="Seleccionar escena del carrusel"
               >
-                <img
-                  src={crop.icon}
-                  alt=""
-                  className="w-3.5 h-3.5 sm:w-4 sm:h-4 object-contain brightness-0 invert"
-                />
-                <span>{crop.label}</span>
-              </button>
-            ))}
-          </div>
-
-          {/* Indicadores y Flechas del Slider */}
-          <div className="flex items-center justify-between sm:justify-end gap-2 pt-1 sm:pt-0 sm:pl-2 border-t sm:border-t-0 sm:border-l border-white/15 shrink-0">
-            <div className="flex items-center gap-1.5 mr-1">
-              {HERO_SLIDES.map((s, idx) => (
-                <button
-                  key={s.id}
-                  type="button"
-                  onClick={() => setActiveIndex(idx)}
-                  aria-label={`Ver slide ${idx + 1}`}
-                  className={`h-2 rounded-full transition-all ${
-                    idx === activeIndex ? 'w-6 bg-brand-red' : 'w-2 bg-white/40 hover:bg-white/75'
-                  }`}
-                />
-              ))}
-            </div>
-            <button
-              type="button"
-              onClick={() =>
-                setActiveIndex((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length)
-              }
-              aria-label="Escena anterior"
-              className="w-8 h-8 rounded-lg bg-white/10 hover:bg-brand-red flex items-center justify-center text-white transition-colors"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveIndex((prev) => (prev + 1) % HERO_SLIDES.length)}
-              aria-label="Escena siguiente"
-              className="w-8 h-8 rounded-lg bg-white/10 hover:bg-brand-red flex items-center justify-center text-white transition-colors"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+                {HERO_SLIDES.map((slide, idx) => {
+                  const isActive = idx === activeIndex;
+                  return (
+                    <button
+                      key={slide.id}
+                      type="button"
+                      role="tab"
+                      aria-selected={isActive}
+                      aria-label={`Ver slide ${idx + 1}`}
+                      onClick={() => setActiveIndex(idx)}
+                      className={`h-3 rounded-full transition-all duration-300 shadow-md ${isActive
+                          ? 'w-7 bg-brand-red ring-2 ring-white/90'
+                          : 'w-3 bg-white/65 hover:bg-white'
+                        }`}
+                    />
+                  );
+                })}
+              </div>
+            </section>
+            );
 }

@@ -14,8 +14,6 @@ import {
   Sparkles,
   Download,
   Compass,
-  ChevronDown,
-  ChevronUp,
 } from 'lucide-react';
 import { apiService } from '../services/api.js';
 
@@ -162,17 +160,8 @@ export default function ProductCatalog({
   const [activeProduct, setActiveProduct] = useState(null);
   const [compareIds, setCompareIds] = useState([]);
   const [showCompareModal, setShowCompareModal] = useState(false);
-  const [showAllCatalog, setShowAllCatalog] = useState(false);
 
   const sectionRef = useRef(null);
-
-  const isFiltered =
-    selectedCategory !== 'all' || Boolean(searchTerm.trim()) || technology !== 'all' || region !== 'all';
-
-  const visibleProducts = useMemo(() => {
-    if (isFiltered || showAllCatalog) return products;
-    return products.slice(0, 6);
-  }, [products, isFiltered, showAllCatalog]);
 
   const activeBannerTab = useMemo(() => {
     const found = BANNER_TABS.find((t) => t.id === selectedCategory);
@@ -288,11 +277,10 @@ export default function ProductCatalog({
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') handleSelectFromCheckerboard(item.id);
             }}
-            className={`group cursor-pointer px-6 sm:px-12 lg:px-16 py-10 sm:py-14 flex items-start gap-5 sm:gap-7 transition-all duration-300 ${
-              item.redTheme
-                ? 'bg-brand-red text-white hover:bg-brand-darkred'
-                : 'bg-brand-lightgray text-brand-navy hover:bg-stone-200/80'
-            }`}
+            className={`group cursor-pointer px-6 sm:px-12 lg:px-16 py-10 sm:py-14 flex items-start gap-5 sm:gap-7 transition-all duration-300 ${item.redTheme
+              ? 'bg-brand-red text-white hover:bg-brand-darkred'
+              : 'bg-brand-lightgray text-brand-navy hover:bg-stone-200/80'
+              }`}
           >
             <div className="shrink-0 pt-1">
               <img
@@ -304,23 +292,20 @@ export default function ProductCatalog({
 
             <div className="space-y-2.5 flex-1">
               <h3
-                className={`font-microbrew text-4xl sm:text-5xl tracking-tight leading-none ${
-                  item.redTheme ? 'text-white drop-shadow-sm' : 'text-brand-red'
-                }`}
+                className={`font-microbrew text-4xl sm:text-5xl tracking-tight leading-none ${item.redTheme ? 'text-white drop-shadow-sm' : 'text-brand-red'
+                  }`}
               >
                 {item.title}
               </h3>
               <p
-                className={`text-sm sm:text-base leading-relaxed font-medium ${
-                  item.redTheme ? 'text-white/95' : 'text-brand-gray'
-                }`}
+                className={`text-sm sm:text-base leading-relaxed font-medium ${item.redTheme ? 'text-white/95' : 'text-brand-gray'
+                  }`}
               >
                 {item.text}
               </p>
               <span
-                className={`inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider pt-1 ${
-                  item.redTheme ? 'text-white' : 'text-brand-red'
-                }`}
+                className={`inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider pt-1 ${item.redTheme ? 'text-white' : 'text-brand-red'
+                  }`}
               >
                 <span>Ver variedades {item.title}</span>
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -423,11 +408,10 @@ export default function ProductCatalog({
                 onClick={() => onCategoryChange(tab.id)}
                 aria-label={`Filtrar por ${tab.label}`}
                 title={tab.label}
-                className={`group relative w-14 h-14 sm:w-[72px] sm:h-[72px] rounded-full bg-white p-0.5 shadow-xl transition-all duration-200 ${
-                  isActive
-                    ? 'ring-4 ring-brand-red opacity-100'
-                    : 'opacity-90 hover:opacity-100 hover:ring-2 hover:ring-brand-red/50'
-                }`}
+                className={`group relative w-14 h-14 sm:w-[72px] sm:h-[72px] rounded-full bg-white p-0.5 shadow-xl transition-all duration-200 ${isActive
+                  ? 'ring-4 ring-brand-red opacity-100'
+                  : 'opacity-90 hover:opacity-100 hover:ring-2 hover:ring-brand-red/50'
+                  }`}
               >
                 <img
                   src={tab.circleImg}
@@ -449,18 +433,21 @@ export default function ProductCatalog({
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-7 border-b border-stone-200 pb-6">
                 <div className="max-w-2xl">
-                  <button
-                    type="button"
-                    onClick={() => onNavigate?.('/')}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-gray hover:text-brand-red mb-3 transition-colors"
-                  >
-                    <ArrowLeft className="w-3.5 h-3.5" />
-                    <span>Volver al Inicio</span>
-                  </button>
-                  <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-red mb-1.5 ml-3">
-                    <Sparkles className="w-3.5 h-3.5" />
-                    Explorador Técnico 2026
-                  </span>
+                  <div className="flex items-center gap-3 mb-2.5">
+                    <button
+                      type="button"
+                      onClick={() => onNavigate?.('/')}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-gray hover:text-brand-red transition-colors"
+                    >
+                      <ArrowLeft className="w-3.5 h-3.5" />
+                      <span>Volver al Inicio</span>
+                    </button>
+                    <span className="text-stone-300">|</span>
+                    <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-red">
+                      <Sparkles className="w-3.5 h-3.5" />
+                      Explorador Técnico 2026
+                    </span>
+                  </div>
                   <h1 className="font-display font-extrabold text-2xl sm:text-4xl text-brand-navy tracking-tight">
                     Fichas agronómicas y comparador de materiales
                   </h1>
@@ -476,13 +463,13 @@ export default function ProductCatalog({
             {(categories.length
               ? categories
               : [
-                  { id: 'all', label: 'Todos los Cultivos' },
-                  { id: 'maiz', label: 'Maíz Grano' },
-                  { id: 'silo', label: 'Maíz Silo' },
-                  { id: 'girasol', label: 'Girasol' },
-                  { id: 'trigo', label: 'Trigo' },
-                  { id: 'soja', label: 'Soja' },
-                ]
+                { id: 'all', label: 'Todos los Cultivos' },
+                { id: 'maiz', label: 'Maíz Grano' },
+                { id: 'silo', label: 'Maíz Silo' },
+                { id: 'girasol', label: 'Girasol' },
+                { id: 'trigo', label: 'Trigo' },
+                { id: 'soja', label: 'Soja' },
+              ]
             ).map((cat) => {
               const active = selectedCategory === cat.id;
               const iconPath = CATEGORY_STYLES[cat.id]?.icon;
@@ -491,17 +478,15 @@ export default function ProductCatalog({
                   key={cat.id}
                   type="button"
                   onClick={() => onCategoryChange(cat.id)}
-                  className={`cast-btn-press min-h-[44px] inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap shrink-0 ${
-                    active
-                      ? 'bg-brand-red text-white shadow-red'
-                      : 'bg-white text-brand-navy border border-stone-200 hover:border-brand-red/50'
-                  }`}
+                  className={`cast-btn-press min-h-[44px] inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap shrink-0 ${active
+                    ? 'bg-brand-red text-white shadow-red'
+                    : 'bg-white text-brand-navy border border-stone-200 hover:border-brand-red/50'
+                    }`}
                 >
                   {iconPath && (
                     <span
-                      className={`w-6 h-6 rounded-lg flex items-center justify-center shrink-0 ${
-                        active ? 'bg-white/20' : 'bg-brand-red'
-                      }`}
+                      className={`w-6 h-6 rounded-lg flex items-center justify-center shrink-0 ${active ? 'bg-white/20' : 'bg-brand-red'
+                        }`}
                     >
                       <img
                         src={iconPath}
@@ -597,146 +582,121 @@ export default function ProductCatalog({
               </button>
             </div>
           ) : (
-            <div className="space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-                {visibleProducts.map((item, idx) => {
-                  const style = CATEGORY_STYLES[item.category] || CATEGORY_STYLES.maiz;
-                  const isSelectedCompare = compareIds.includes(item.id);
-                  const staggerDelay = Math.min(idx, 5) * 55;
-                  return (
-                    <article
-                      key={`${selectedCategory}-${item.id}`}
-                      onPointerMove={handleCardPointerMove}
-                      onPointerLeave={handleCardPointerLeave}
-                      className="gsap-product-card spotlight-card group bg-white rounded-3xl border border-stone-200/90 shadow-card hover:shadow-soft hover:border-brand-red/50 flex flex-col justify-between overflow-hidden"
-                    >
-                      <div>
-                        <div className="relative h-32 overflow-hidden bg-brand-navy">
-                          <img
-                            src={style.banner}
-                            alt={item.categoryLabel}
-                            className="w-full h-full object-cover opacity-80 transition-transform duration-500 group-hover:scale-110"
-                          />
-                          <div
-                            className="absolute inset-0"
-                            style={{
-                              background:
-                                'linear-gradient(180deg, rgba(16,15,38,0.38) 0%, rgba(16,15,38,0.94) 100%)',
-                            }}
-                          />
-                          <div className="absolute top-3 left-4 right-4 flex items-center justify-between gap-2">
-                            <span
-                              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-xs font-bold shadow-sm ${style.badge}`}
-                            >
-                              <img
-                                src={style.icon}
-                                alt=""
-                                className="w-3.5 h-3.5 object-contain brightness-0 invert"
-                              />
-                              {item.categoryLabel}
-                            </span>
-                            <span className="px-2.5 py-1 rounded-lg bg-white/95 text-brand-navy text-xs font-extrabold shadow-sm">
-                              {item.technology}
-                            </span>
-                          </div>
-
-                          <div className="absolute bottom-2.5 left-4 right-16">
-                            <h3 className="font-display font-extrabold text-xl text-white tracking-tight drop-shadow-sm">
-                              {item.name}
-                            </h3>
-                            <p className="text-[11px] font-bold text-rose-200">
-                              Ciclo: {item.cycle} · {item.relativeMaturity}
-                            </p>
-                          </div>
-
-                          <img
-                            src={style.cutout}
-                            alt=""
-                            aria-hidden="true"
-                            className="absolute -bottom-1 right-3 w-14 h-14 object-contain drop-shadow-xl transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-1"
-                          />
-                        </div>
-
-                        <div className="p-5 sm:p-6 space-y-4">
-                          <p className="text-sm text-brand-gray leading-relaxed">{item.tagline}</p>
-
-                          <div className="space-y-2.5 pt-1">
-                            <ScoreBar
-                              label="Potencial de Rinde"
-                              value={item.scores.yieldPotential}
-                              delayMs={staggerDelay + 80}
-                            />
-                            <ScoreBar
-                              label="Estabilidad Ambiental"
-                              value={item.scores.stability}
-                              delayMs={staggerDelay + 140}
-                            />
-                            <ScoreBar
-                              label="Sanidad Integral"
-                              value={item.scores.sanitaryProfile}
-                              delayMs={staggerDelay + 200}
-                            />
-                          </div>
-
-                          <ul className="space-y-1.5 pt-1">
-                            {item.highlights.slice(0, 2).map((hl) => (
-                              <li key={hl} className="flex items-start gap-2 text-xs text-brand-gray">
-                                <CheckCircle2 className="w-4 h-4 text-brand-red shrink-0 mt-0.5" />
-                                <span>{hl}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-
-                      <div className="relative z-10 px-5 sm:px-6 pb-5 sm:pb-6 pt-3 border-t border-stone-100 flex flex-wrap gap-2">
-                        <button
-                          type="button"
-                          onClick={() => setActiveProduct(item)}
-                          className="cast-btn-press cast-btn-arrow flex-1 min-h-[44px] inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-brand-red hover:bg-brand-darkred text-white text-sm font-bold shadow-sm"
-                        >
-                          <span>Ficha Técnica</span>
-                          <ArrowUpRight className="w-4 h-4 arrow-icon" />
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => toggleCompare(item.id)}
-                          className={`cast-btn-press min-h-[44px] inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl border text-sm font-semibold ${
-                            isSelectedCompare
-                              ? 'bg-brand-navy border-brand-navy text-white'
-                              : 'bg-white border-stone-200 text-brand-navy hover:bg-brand-lightgray'
-                          }`}
-                        >
-                          <Scale className="w-4 h-4" />
-                          <span>{isSelectedCompare ? 'En comparador' : 'Comparar'}</span>
-                        </button>
-                      </div>
-                    </article>
-                  );
-                })}
-              </div>
-
-              {!isFiltered && products.length > 6 && (
-                <div className="text-center">
-                  <button
-                    type="button"
-                    onClick={() => setShowAllCatalog((prev) => !prev)}
-                    className="cast-btn-press min-h-[46px] px-7 py-2.5 rounded-full bg-white border border-stone-300 hover:border-brand-red text-brand-navy font-bold text-xs uppercase tracking-wider inline-flex items-center gap-2 shadow-sm transition-colors"
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+              {products.map((item, idx) => {
+                const style = CATEGORY_STYLES[item.category] || CATEGORY_STYLES.maiz;
+                const isSelectedCompare = compareIds.includes(item.id);
+                const staggerDelay = Math.min(idx, 5) * 55;
+                return (
+                  <article
+                    key={`${selectedCategory}-${item.id}`}
+                    onPointerMove={handleCardPointerMove}
+                    onPointerLeave={handleCardPointerLeave}
+                    className="gsap-product-card spotlight-card group bg-white rounded-3xl border border-stone-200/90 shadow-card hover:shadow-soft hover:border-brand-red/50 flex flex-col justify-between overflow-hidden"
                   >
-                    {showAllCatalog ? (
-                      <>
-                        <span>Mostrar resumen (6 materiales)</span>
-                        <ChevronUp className="w-4 h-4 text-brand-red" />
-                      </>
-                    ) : (
-                      <>
-                        <span>Ver todo el portfolio ({products.length} materiales)</span>
-                        <ChevronDown className="w-4 h-4 text-brand-red" />
-                      </>
-                    )}
-                  </button>
-                </div>
-              )}
+                    <div>
+                      <div className="relative h-32 overflow-hidden bg-brand-navy">
+                        <img
+                          src={style.banner}
+                          alt={item.categoryLabel}
+                          className="w-full h-full object-cover opacity-80 transition-transform duration-500 group-hover:scale-110"
+                        />
+                        <div
+                          className="absolute inset-0"
+                          style={{
+                            background:
+                              'linear-gradient(180deg, rgba(16,15,38,0.38) 0%, rgba(16,15,38,0.94) 100%)',
+                          }}
+                        />
+                        <div className="absolute top-3 left-4 right-4 flex items-center justify-between gap-2">
+                          <span
+                            className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-xs font-bold shadow-sm ${style.badge}`}
+                          >
+                            <img
+                              src={style.icon}
+                              alt=""
+                              className="w-3.5 h-3.5 object-contain brightness-0 invert"
+                            />
+                            {item.categoryLabel}
+                          </span>
+                          <span className="px-2.5 py-1 rounded-lg bg-white/95 text-brand-navy text-xs font-extrabold shadow-sm">
+                            {item.technology}
+                          </span>
+                        </div>
+
+                        <div className="absolute bottom-2.5 left-4 right-16">
+                          <h3 className="font-display font-extrabold text-xl text-white tracking-tight drop-shadow-sm">
+                            {item.name}
+                          </h3>
+                          <p className="text-[11px] font-bold text-rose-200">
+                            Ciclo: {item.cycle} · {item.relativeMaturity}
+                          </p>
+                        </div>
+
+                        <img
+                          src={style.cutout}
+                          alt=""
+                          aria-hidden="true"
+                          className="absolute -bottom-1 right-3 w-14 h-14 object-contain drop-shadow-xl transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-1"
+                        />
+                      </div>
+
+                      <div className="p-5 sm:p-6 space-y-4">
+                        <p className="text-sm text-brand-gray leading-relaxed">{item.tagline}</p>
+
+                        <div className="space-y-2.5 pt-1">
+                          <ScoreBar
+                            label="Potencial de Rinde"
+                            value={item.scores.yieldPotential}
+                            delayMs={staggerDelay + 80}
+                          />
+                          <ScoreBar
+                            label="Estabilidad Ambiental"
+                            value={item.scores.stability}
+                            delayMs={staggerDelay + 140}
+                          />
+                          <ScoreBar
+                            label="Sanidad Integral"
+                            value={item.scores.sanitaryProfile}
+                            delayMs={staggerDelay + 200}
+                          />
+                        </div>
+
+                        <ul className="space-y-1.5 pt-1">
+                          {item.highlights.slice(0, 2).map((hl) => (
+                            <li key={hl} className="flex items-start gap-2 text-xs text-brand-gray">
+                              <CheckCircle2 className="w-4 h-4 text-brand-red shrink-0 mt-0.5" />
+                              <span>{hl}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div className="relative z-10 px-5 sm:px-6 pb-5 sm:pb-6 pt-3 border-t border-stone-100 flex flex-wrap gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setActiveProduct(item)}
+                        className="cast-btn-press cast-btn-arrow flex-1 min-h-[44px] inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-brand-red hover:bg-brand-darkred text-white text-sm font-bold shadow-sm"
+                      >
+                        <span>Ficha Técnica</span>
+                        <ArrowUpRight className="w-4 h-4 arrow-icon" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => toggleCompare(item.id)}
+                        className={`cast-btn-press min-h-[44px] inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl border text-sm font-semibold ${isSelectedCompare
+                          ? 'bg-brand-navy border-brand-navy text-white'
+                          : 'bg-white border-stone-200 text-brand-navy hover:bg-brand-lightgray'
+                          }`}
+                      >
+                        <Scale className="w-4 h-4" />
+                        <span>{isSelectedCompare ? 'En comparador' : 'Comparar'}</span>
+                      </button>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           )}
         </div>

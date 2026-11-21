@@ -23,11 +23,45 @@ test.describe('LG Semillas — Pruebas Funcionales, Rutas Independientes y Audit
 
     const headerBg = await header.evaluate((el) => getComputedStyle(el).backgroundColor);
     expect(headerBg).toContain('255, 255, 255');
+    const headerBorderBottom = await header.evaluate((el) => getComputedStyle(el).borderBottomWidth);
+    expect(headerBorderBottom).toBe('0px');
 
     const logoLoaded = await header
       .locator('img[src="/assets/logo/logonuevo04.png"]')
       .evaluate((img) => img.complete && img.naturalWidth > 0);
     expect(logoLoaded).toBe(true);
+
+    // Verificar ausencia del dock inferior del Hero y funcionamiento de los 3 puntitos
+    await expect(page.locator('#inicio input[aria-label="Buscar híbrido o variedad"]')).toHaveCount(0);
+    const heroDots = page.locator('#inicio [role="tablist"] [role="tab"]');
+    await expect(heroDots).toHaveCount(3);
+    await heroDots.nth(1).click();
+    await expect(page.locator('#inicio img[src="/assets/hero/somoslg.png"]')).toBeVisible();
+    await page.waitForTimeout(450);
+
+    // Verificar que el box rojo del slide 2 está a la izquierda y coincide en ancho con el box blanco de #nosotros
+    const alignmentCheck = await page.evaluate(() => {
+      const redBox = document.querySelector('[data-testid="hero-somoslg-box"]');
+      const whiteBox = document.querySelector('#nosotros > div > div:first-child');
+      if (!redBox || !whiteBox) return null;
+      const rRed = redBox.getBoundingClientRect();
+      const rWhite = whiteBox.getBoundingClientRect();
+      return {
+        redLeft: Math.round(rRed.left),
+        whiteLeft: Math.round(rWhite.left),
+        redWidth: Math.round(rRed.width),
+        whiteWidth: Math.round(rWhite.width),
+      };
+    });
+    expect(alignmentCheck).not.toBeNull();
+    expect(alignmentCheck.redLeft).toBe(0);
+    expect(alignmentCheck.redLeft).toBe(alignmentCheck.whiteLeft);
+    expect(alignmentCheck.redWidth).toBe(alignmentCheck.whiteWidth);
+    await page.screenshot({ path: `${SCREENSHOT_DIR}/desktop-hero-slide2.png`, fullPage: false });
+
+    await heroDots.nth(2).click();
+    await expect(page.locator('#inicio img[src="/assets/hero/cooperamos-agricultura-2.png"]')).toBeVisible();
+    await heroDots.nth(0).click();
 
     // Verificar que las secciones movidas NO están en el Home (/)
     await expect(page.locator('#catalogo')).toHaveCount(0);
@@ -92,6 +126,16 @@ test.describe('LG Semillas — Pruebas Funcionales, Rutas Independientes y Audit
     await expect(novedades.getByRole('heading', { name: /Enraízados en el Propósito/i })).toBeVisible();
     await expect(novedades.getByRole('heading', { name: /T\. Reynal e I\. Martínez/i })).toBeVisible();
 
+    // Verificar que la barra de menú (<header>) permanece sticky al hacer scroll hasta el final
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await page.waitForTimeout(250);
+    const stickyMetrics = await header.evaluate((el) => ({
+      scrollY: window.scrollY,
+      top: Math.round(el.getBoundingClientRect().top),
+    }));
+    expect(stickyMetrics.scrollY).toBeGreaterThan(500);
+    expect(stickyMetrics.top).toBe(0);
+
     // Captura completa del Home rediseñado
     await page.evaluate(() => window.scrollTo(0, 0));
     await page.waitForTimeout(350);
@@ -111,12 +155,13 @@ test.describe('LG Semillas — Pruebas Funcionales, Rutas Independientes y Audit
     await expect(page.locator('#catalogo')).toBeVisible();
 
     // Filtrar por Girasol y volver a Todos los Cultivos
-    await page.getByRole('button', { name: 'Girasol', exact: true }).click();
-    await expect(page.locator('#catalogo h3', { hasText: 'LG 5710 CL' })).toBeVisible();
-    await expect(page.locator('#catalogo h3', { hasText: 'LG 30680 VIP3' })).toHaveCount(0);
+    const catalogo = page.locator('#catalogo');
+    await catalogo.getByRole('button', { name: 'Girasol', exact: true }).click();
+    await expect(catalogo.locator('h3', { hasText: 'LG 5710 CL' })).toBeVisible();
+    await expect(catalogo.locator('h3', { hasText: 'LG 30680 VIP3' })).toHaveCount(0);
 
-    await page.getByRole('button', { name: 'Todos los Cultivos' }).click();
-    await expect(page.locator('#catalogo h3', { hasText: 'LG 30680 VIP3' })).toBeVisible();
+    await catalogo.getByRole('button', { name: 'Todos los Cultivos' }).click();
+    await expect(catalogo.locator('h3', { hasText: 'LG 30680 VIP3' })).toBeVisible();
     await page.waitForTimeout(450);
     await page.screenshot({ path: `${SCREENSHOT_DIR}/desktop-catalog.png`, fullPage: false });
 

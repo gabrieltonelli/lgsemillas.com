@@ -51,8 +51,8 @@ export default function Navbar({ currentPath = '/', onNavigate, onSelectCropShor
 
   return (
     <header
-      className={`sticky top-0 z-40 transition-shadow duration-300 bg-white ${
-        scrolled ? 'shadow-soft border-b border-stone-200' : 'border-b border-stone-200/80'
+      className={`sticky top-0 z-50 w-full transition-shadow duration-300 bg-white ${
+        scrolled ? 'shadow-soft' : ''
       }`}
     >
       <div className="w-full flex items-stretch justify-between">

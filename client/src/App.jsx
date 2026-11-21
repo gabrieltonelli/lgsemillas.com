@@ -123,14 +123,14 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-brand-navy overflow-x-hidden">
+    <div className="min-h-screen flex flex-col bg-white text-brand-navy">
       <Navbar
         currentPath={currentPath}
         onNavigate={navigateTo}
         onSelectCropShortcut={setSelectedCategory}
       />
 
-      <main className="flex-1">
+      <main className="flex-1 overflow-x-clip">
         {currentPath === '/' && (
           <>
             <Hero
